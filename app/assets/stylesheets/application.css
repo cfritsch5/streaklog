@@ -13,3 +13,51 @@
  *= require_tree .
  *= require_self
  */
+
+body, html, div, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+.top, .bottom, .today, .streaks, .addedit, .avatar {
+  display: flex;
+  /*border: 1px solid grey;*/
+  justify-content: center;
+  align-items: center;
+}
+.top, .bottom {
+  flex-direction: row;
+}
+.today, .addedit, .streaks {
+  flex-direction: column;
+}
+
+.avatar {
+  width: 30%;
+}
+
+.streaks {
+  width: 70%;
+}
+
+.avater, .streaks {
+  height: 50vh;
+}
+
+.today, .addedit {
+  width: 50%;
+  height: 50vh;
+  justify-content: flex-start;
+}
+
+.streak {
+  width: 95%;
+  border-radius: 10em;
+  background: green;
+  margin: 1%;
+}
+
+img {
+  width: 80%;
+  border-radius: 25px;
+}
