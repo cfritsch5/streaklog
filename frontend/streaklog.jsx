@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import Root from './features/root';
+import Root from './features/root';
 import configureStore from './store';
 
 document.addEventListener('DOMContentLoaded', () => {
