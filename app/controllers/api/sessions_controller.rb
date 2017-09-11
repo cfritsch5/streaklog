@@ -1,4 +1,5 @@
-class SessionsController < ApplicationController
+class Api::SessionsController < ApplicationController
+
   def create
     @user = User.find_by(
     username: params[:user][:username],
@@ -6,7 +7,7 @@ class SessionsController < ApplicationController
 
     if @user
       login(@user)
-      render 'api/show'
+      render 'api/users/show'
     else
       render json: ['error invalid login'], status: 401
     end
@@ -15,7 +16,7 @@ class SessionsController < ApplicationController
   def destroy
     if current_user
       logout
-      render 'sessions/new'
+      render 'api/sessions/new'
     else
       render json: ['an error occured'], status: 404
   end

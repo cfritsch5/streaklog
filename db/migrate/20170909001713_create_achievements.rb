@@ -1,12 +1,12 @@
 class CreateAchievements < ActiveRecord::Migration[5.0]
   def change
     create_table :achievements do |t|
-      t.string :achievement
-      t.integer :user_id
+      t.string :achievement, null: false
+      t.integer :user_id, null: false
       t.string :description
       t.integer :difficulty
       t.string :notes
-      t.array :tags
+      t.string :tags, array: true
 
       t.timestamps
     end

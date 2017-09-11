@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.destroy_all
+Achievement.destroy_all
+Routine.destroy_all
+
+user_1 = User.create!(username: 'cfritsch', email: 'caseyfritsch@gmail.com', password: 'password')
+achievement_1 = Achievement.create!(achievement: 'levo', user_id: user_1.id, difficulty: 1, tags: ['meds', 'daily'] )
+routine_1 = Routine.create!(name:'Take levo', achievement: achievement_1, repeats: ['daily'], user_id: user_1.id)
+achievement_2 = Achievement.create!(achievement: 'returned sophie\'s email', user_id: user_1.id, difficulty: 5, tags: ['email'])
