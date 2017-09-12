@@ -1,0 +1,27 @@
+.avatar-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-overlay {
+  position: absolute;
+  z-index: 1;
+  width: 24%;
+  height: 45%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar-overlay button {
+  align-self: flex-start;
+}
+
+.dropdown {
+  display: table;
+}
+
+.dropdown-content {
+  padding: 10%;
+  margin-top: 10%;
+}

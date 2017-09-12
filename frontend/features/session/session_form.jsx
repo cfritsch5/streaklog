@@ -1,15 +1,17 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+// import { Link, withRouter } from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      email: '',
       username: '',
-      password: ''
+      password: '',
+      signup: false
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.signInAsGuest = this.signInAsGuest.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
   }
 
   update(field) {
@@ -17,46 +19,57 @@ class SessionForm extends React.Component {
       [field]: e.currentTarget.value
     });
   }
+  //
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   const user = {
+  //     username: this.state.username,
+  //     email: this.state.email,
+  //     password: this.state.password
+  //   };
+  //   console.log("submit");
+  //   console.log(e.currentTarget.value);
+  //   }
+  //   if( e.currentTarget.value === 'login'){
+  //     console.log("login");
+  //   } else {
+  //     console.log("signup");
+  //   }
+  // }
 
-  signInAsGuest (e) {
-  e.preventDefault();
-  const user = {
-    username: "Guest",
-    password: "password"
-  };
-  this.setState({user});
-  setTimeout(this.props.processForm({user}),500);
-}
-
-  handleSubmit(e) {
+  handleSignup(e){
     e.preventDefault();
-    const user = this.state;
-    this.props.processForm({user});
-  }
-
-  navLink() {
-    let login = "Login", signup = "Sign Up";
-    if (this.props.formType === 'login') {
-      return (<div className="signup-v-login">
-      <div className="sess-buttons">
-        <input type="submit" value={login} />
-        <input className="signup-v-login" onClick={this.signInAsGuest} type="submit" value="Guest"/>
-      </div>
-        <Link to="/signup">{signup} Instead</Link>
-      </div>
-    );
+    if(this.state.signup === true){
+      const user = {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password
+      };
+      this.props.signup({user});
     } else {
-      return(<div className="signup-v-login">
-      <div className="sess-buttons">
-        <input type="submit" value={signup} />
-      </div>
-        <Link to="/login">{login} Instead</Link>
-       </div>
-     );
+      this.setState({signup: !this.state.signup});
     }
   }
 
+  handleLogin(e){
+    e.preventDefault();
+    if(this.state.signup === true){
+      this.setState({signup: !this.state.signup});
+    }
+    const user = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.login({user});
+  }
+
   renderErrors() {
+    if (this.props.errors.length === 0) {
+      console.log("err true");
+    } else {
+      console.log("err flase");
+    }
     return(
       <ul>
         {this.props.errors.map((error, i) => (
@@ -69,21 +82,31 @@ class SessionForm extends React.Component {
   }
 
   render() {
+    let signup;
+    if (this.state.signup === true){
+      signup = (
+          <div className="login-item">
+              <input type="text"
+                value={this.state.email}
+                placeholder='email'
+                onChange={this.update('email')}
+                className="login-input"
+              />
+          </div>
+      );
+    }
     return (
-      <div>
-      <TagLine />
-      <div className="login-form-container">
-        <form onSubmit={this.handleSubmit} className="login-form-box">
-          {this.renderErrors()}
-          <div className="login-form-item">
+      <div className="session">
+        <form onSubmit={this.handleSubmit} className="login-form">
+          <div className="login-item">
               <input type="text"
                 value={this.state.username}
                 placeholder='Username'
                 onChange={this.update('username')}
                 className="login-input"
               />
-          </div>
-          <div className="login-form-item">
+            </div>
+          <div className="login-item">
               <input type="password"
                 value={this.state.password}
                 placeholder='Password'
@@ -91,13 +114,14 @@ class SessionForm extends React.Component {
                 className="login-input"
               />
             </div>
-            {this.navLink()}
+            {signup}
+            <button onClick={this.handleLogin} value='login'>Login</button>
+            <button onClick={this.handleSignup} value='signup'>signup</button>
+            {this.renderErrors()}
         </form>
       </div>
-    </div>
-
     );
   }
 }
 
-export default withRouter(SessionForm);
+export default SessionForm;

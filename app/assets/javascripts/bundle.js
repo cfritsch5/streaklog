@@ -42563,20 +42563,27 @@ var _avatar = __webpack_require__(295);
 
 var _avatar2 = _interopRequireDefault(_avatar);
 
+var _session_actions = __webpack_require__(286);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(_ref) {
-  var avatar = _ref.avatar;
+  var session = _ref.session,
+      avatar = _ref.avatar;
 
   return {
+    loggedIn: Boolean(session.currentUser),
+    currentUser: session.currentUser,
     avatar: avatar
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref2) {
-  var location = _ref2.location;
-
-  return {};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    logout: function logout() {
+      return dispatch((0, _session_actions.logout)());
+    }
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_avatar2.default);
@@ -42598,6 +42605,10 @@ var _react = __webpack_require__(23);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _session_form_container = __webpack_require__(296);
+
+var _session_form_container2 = _interopRequireDefault(_session_form_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42609,22 +42620,97 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Avatar = function (_React$Component) {
   _inherits(Avatar, _React$Component);
 
-  function Avatar() {
+  function Avatar(props) {
     _classCallCheck(this, Avatar);
 
-    return _possibleConstructorReturn(this, (Avatar.__proto__ || Object.getPrototypeOf(Avatar)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Avatar.__proto__ || Object.getPrototypeOf(Avatar)).call(this, props));
+
+    _this.dropdown = _this.dropdown.bind(_this);
+    _this.login = _this.login.bind(_this);
+    _this.close = _this.close.bind(_this);
+    _this.state = {
+      show: false
+    };
+    return _this;
   }
 
   _createClass(Avatar, [{
+    key: 'login',
+    value: function login() {
+      if (this.props.loggedIn) {
+        this.props.logout();
+      } else {
+        this.setState({ show: !this.state.show });
+      }
+    }
+  }, {
+    key: 'close',
+    value: function close(e) {
+      e.preventDefault();
+      console.log("out");
+      this.setState({ show: false });
+    }
+  }, {
+    key: 'dropdown',
+    value: function dropdown() {
+      // <div className="dropdown">
+      return _react2.default.createElement(
+        'div',
+        { className: 'dropdown', onMouseLeave: this.close },
+        _react2.default.createElement(
+          'div',
+          { className: 'dropdown-content' },
+          _react2.default.createElement(_session_form_container2.default, null)
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var login = void 0; //= this.props.loggedIn ? "logout" : "Login";
+      if (this.props.loggedIn) {
+        login = "logout";
+      } else {
+        if (this.state.show) {
+          login = "Hide Login";
+        } else {
+          login = "Login";
+        }
+      }
+      var dropdown = void 0;
+      if (this.state.show && !this.props.loggedIn) {
+        dropdown = this.dropdown();
+      } else {
+
+        dropdown = _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'h3',
+            null,
+            username
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.login },
+            login
+          )
+        );
+      }
+
+      var username = this.props.currentUser ? this.props.currentUser.username : null;
       return _react2.default.createElement(
         'div',
         { className: 'avatar' },
         _react2.default.createElement(
           'div',
           { className: 'avatar-content' },
-          _react2.default.createElement('img', { src: 'assets/spark.jpg' })
+          _react2.default.createElement('img', { src: 'assets/spark.jpg' }),
+          _react2.default.createElement(
+            'div',
+            { className: 'avatar-overlay' },
+            dropdown
+          )
         )
       );
     }
@@ -42634,6 +42720,240 @@ var Avatar = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Avatar;
+
+/***/ }),
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(110);
+
+var _session_actions = __webpack_require__(286);
+
+var _session_form = __webpack_require__(297);
+
+var _session_form2 = _interopRequireDefault(_session_form);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var session = _ref.session;
+
+  return {
+    loggedIn: Boolean(session.currentUser),
+    errors: session.errors
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref2) {
+  var location = _ref2.location;
+
+
+  return {
+    login: function login(user) {
+      return dispatch((0, _session_actions.login)(user));
+    },
+    signup: function signup(user) {
+      return dispatch((0, _session_actions.signup)(user));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_form2.default);
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(23);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import { Link, withRouter } from 'react-router-dom';
+
+var SessionForm = function (_React$Component) {
+  _inherits(SessionForm, _React$Component);
+
+  function SessionForm(props) {
+    _classCallCheck(this, SessionForm);
+
+    var _this = _possibleConstructorReturn(this, (SessionForm.__proto__ || Object.getPrototypeOf(SessionForm)).call(this, props));
+
+    _this.state = {
+      email: '',
+      username: '',
+      password: '',
+      signup: false
+    };
+    _this.handleLogin = _this.handleLogin.bind(_this);
+    _this.handleSignup = _this.handleSignup.bind(_this);
+    return _this;
+  }
+
+  _createClass(SessionForm, [{
+    key: 'update',
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+      };
+    }
+    //
+    // handleSubmit(e) {
+    //   e.preventDefault();
+    //   const user = {
+    //     username: this.state.username,
+    //     email: this.state.email,
+    //     password: this.state.password
+    //   };
+    //   console.log("submit");
+    //   console.log(e.currentTarget.value);
+    //   }
+    //   if( e.currentTarget.value === 'login'){
+    //     console.log("login");
+    //   } else {
+    //     console.log("signup");
+    //   }
+    // }
+
+  }, {
+    key: 'handleSignup',
+    value: function handleSignup(e) {
+      e.preventDefault();
+      if (this.state.signup === true) {
+        var user = {
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password
+        };
+        this.props.signup({ user: user });
+      } else {
+        this.setState({ signup: !this.state.signup });
+      }
+    }
+  }, {
+    key: 'handleLogin',
+    value: function handleLogin(e) {
+      e.preventDefault();
+      if (this.state.signup === true) {
+        this.setState({ signup: !this.state.signup });
+      }
+      var user = {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password
+      };
+      this.props.login({ user: user });
+    }
+  }, {
+    key: 'renderErrors',
+    value: function renderErrors() {
+      if (this.props.errors.length === 0) {
+        console.log("err true");
+      } else {
+        console.log("err flase");
+      }
+      return _react2.default.createElement(
+        'ul',
+        null,
+        this.props.errors.map(function (error, i) {
+          return _react2.default.createElement(
+            'li',
+            { key: 'error-' + i },
+            error
+          );
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var signup = void 0;
+      if (this.state.signup === true) {
+        signup = _react2.default.createElement(
+          'div',
+          { className: 'login-item' },
+          _react2.default.createElement('input', { type: 'text',
+            value: this.state.email,
+            placeholder: 'email',
+            onChange: this.update('email'),
+            className: 'login-input'
+          })
+        );
+      }
+      return _react2.default.createElement(
+        'div',
+        { className: 'session' },
+        _react2.default.createElement(
+          'form',
+          { onSubmit: this.handleSubmit, className: 'login-form' },
+          _react2.default.createElement(
+            'div',
+            { className: 'login-item' },
+            _react2.default.createElement('input', { type: 'text',
+              value: this.state.username,
+              placeholder: 'Username',
+              onChange: this.update('username'),
+              className: 'login-input'
+            })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'login-item' },
+            _react2.default.createElement('input', { type: 'password',
+              value: this.state.password,
+              placeholder: 'Password',
+              onChange: this.update('password'),
+              className: 'login-input'
+            })
+          ),
+          signup,
+          _react2.default.createElement(
+            'button',
+            { onClick: this.handleLogin, value: 'login' },
+            'Login'
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.handleSignup, value: 'signup' },
+            'signup'
+          ),
+          this.renderErrors()
+        )
+      );
+    }
+  }]);
+
+  return SessionForm;
+}(_react2.default.Component);
+
+exports.default = SessionForm;
 
 /***/ })
 /******/ ]);
