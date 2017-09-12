@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Avatar from './avatar';
-import {logout} from '../session/session_actions';
+import {logout} from './session/session_actions';
 
 
 const mapStateToProps = ({ session, avatar }) => {
