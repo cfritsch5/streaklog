@@ -27,9 +27,9 @@ class Avatar extends React.Component{
   }
 
   dropdown() {
-    // <div className="dropdown">
+    // <div className="dropdown" onMouseLeave={this.close}>
     return (
-      <div className="dropdown" onMouseLeave={this.close}>
+      <div className="dropdown">
         <div className="dropdown-content">
           <SessionFormContainer />
         </div>
@@ -54,9 +54,9 @@ class Avatar extends React.Component{
     } else {
 
       dropdown = (
-        <div>
+        <div className="dropdown">
           <h3>{username}</h3>
-          <button onClick={this.login}>{login}</button>
+          <button className="login-button" onClick={this.login}>{login}</button>
 
         </div>
       );

@@ -19,7 +19,7 @@ body, html, div, h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-.top, .bottom, .today, .streaks, .addedit, .avatar {
+.login-form, .top, .bottom, .today, .streaks, .addedit, .avatar {
   display: flex;
   /*border: 1px solid grey;*/
   justify-content: center;
@@ -28,7 +28,7 @@ body, html, div, h1, h2, h3, h4, h5, h6 {
 .top, .bottom {
   flex-direction: row;
 }
-.today, .addedit, .streaks {
+.login-form, .today, .addedit, .streaks {
   flex-direction: column;
 }
 

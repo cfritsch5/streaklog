@@ -25364,10 +25364,10 @@ var Avatar = function (_React$Component) {
   }, {
     key: 'dropdown',
     value: function dropdown() {
-      // <div className="dropdown">
+      // <div className="dropdown" onMouseLeave={this.close}>
       return _react2.default.createElement(
         'div',
-        { className: 'dropdown', onMouseLeave: this.close },
+        { className: 'dropdown' },
         _react2.default.createElement(
           'div',
           { className: 'dropdown-content' },
@@ -25395,7 +25395,7 @@ var Avatar = function (_React$Component) {
 
         dropdown = _react2.default.createElement(
           'div',
-          null,
+          { className: 'dropdown' },
           _react2.default.createElement(
             'h3',
             null,
@@ -25403,7 +25403,7 @@ var Avatar = function (_React$Component) {
           ),
           _react2.default.createElement(
             'button',
-            { onClick: this.login },
+            { className: 'login-button', onClick: this.login },
             login
           )
         );
@@ -25664,34 +25664,46 @@ var SessionForm = function (_React$Component) {
           { onSubmit: this.handleSubmit, className: 'login-form' },
           _react2.default.createElement(
             'div',
-            { className: 'login-item' },
-            _react2.default.createElement('input', { type: 'text',
-              value: this.state.username,
-              placeholder: 'Username',
-              onChange: this.update('username'),
-              className: 'login-input'
-            })
+            { className: 'login-form' },
+            _react2.default.createElement(
+              'div',
+              { className: 'login-item' },
+              _react2.default.createElement('input', { type: 'text',
+                value: this.state.username,
+                placeholder: 'Username',
+                onChange: this.update('username'),
+                className: 'login-input'
+              })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'login-item' },
+              _react2.default.createElement('input', { type: 'password',
+                value: this.state.password,
+                placeholder: 'Password',
+                onChange: this.update('password'),
+                className: 'login-input'
+              })
+            ),
+            signup
           ),
           _react2.default.createElement(
             'div',
-            { className: 'login-item' },
-            _react2.default.createElement('input', { type: 'password',
-              value: this.state.password,
-              placeholder: 'Password',
-              onChange: this.update('password'),
-              className: 'login-input'
-            })
-          ),
-          signup,
-          _react2.default.createElement(
-            'button',
-            { onClick: this.handleLogin, value: 'login' },
-            'Login'
-          ),
-          _react2.default.createElement(
-            'button',
-            { onClick: this.handleSignup, value: 'signup' },
-            'signup'
+            { className: 'bottom' },
+            _react2.default.createElement(
+              'button',
+              { className: '',
+                onClick: this.handleLogin,
+                value: 'login' },
+              'Login'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: '',
+                onClick: this.handleSignup,
+                value: 'signup' },
+              'signup'
+            )
           ),
           this.renderErrors()
         )

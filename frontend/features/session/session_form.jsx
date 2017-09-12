@@ -98,25 +98,33 @@ class SessionForm extends React.Component {
     return (
       <div className="session">
         <form onSubmit={this.handleSubmit} className="login-form">
-          <div className="login-item">
+          <div className="login-form">
+            <div className="login-item">
               <input type="text"
                 value={this.state.username}
                 placeholder='Username'
                 onChange={this.update('username')}
                 className="login-input"
-              />
+                />
             </div>
-          <div className="login-item">
+            <div className="login-item">
               <input type="password"
                 value={this.state.password}
                 placeholder='Password'
                 onChange={this.update('password')}
                 className="login-input"
-              />
+                />
             </div>
             {signup}
-            <button onClick={this.handleLogin} value='login'>Login</button>
-            <button onClick={this.handleSignup} value='signup'>signup</button>
+          </div>
+          <div className="bottom">
+            <button className=""
+              onClick={this.handleLogin}
+              value='login'>Login</button>
+            <button className="" 
+              onClick={this.handleSignup}
+              value='signup'>signup</button>
+          </div>
             {this.renderErrors()}
         </form>
       </div>
