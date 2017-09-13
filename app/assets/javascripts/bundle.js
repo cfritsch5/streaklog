@@ -24997,8 +24997,10 @@ var _addedit2 = _interopRequireDefault(_addedit);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapStateToProps = function mapStateToProps() {
-  return {};
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    routines: state.routines
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref) {
@@ -25045,10 +25047,44 @@ var AddEdit = function (_React$Component) {
     _this.state = {
       type: 'add'
     };
+
+    _this.routines = _this.routines.bind(_this);
+    // this.checkRtnAchv = this.checkRtnAchv.bind(this);
+    // this.newRoutine = this.newRoutine.bind(this);
+    // this.newAchievement = this.newAchievement.bind(this);
     return _this;
   }
 
   _createClass(AddEdit, [{
+    key: 'routines',
+    value: function routines() {
+      var _this2 = this;
+
+      var routines = Object.keys(this.props.routines).map(function (id) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'label',
+            { onClick: _this2.checkRtnAchv },
+            _react2.default.createElement('input', { id: 'checkBox', type: 'checkbox' }),
+            _this2.props.routines[id].name
+          )
+        );
+      });
+      return routines;
+    }
+
+    // newRoutine(){
+    //
+    // }
+    //
+    // newAchievement(){
+    //
+    // }
+
+
+  }, {
     key: 'render',
     value: function render() {
       var type = void 0;
@@ -25075,10 +25111,30 @@ var AddEdit = function (_React$Component) {
           );
       }
 
+      var routines = this.routines();
+
       return _react2.default.createElement(
         'div',
         { className: 'addedit' },
-        type
+        _react2.default.createElement(
+          'div',
+          { clasName: 'add' },
+          _react2.default.createElement(
+            'button',
+            { onClick: this.newRoutine },
+            'New Routine'
+          ),
+          _react2.default.createElement(
+            'button',
+            { onClick: this.newAchievement },
+            'New Achievement'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'routines' },
+          routines
+        )
       );
     }
   }]);

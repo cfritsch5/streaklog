@@ -7,7 +7,35 @@ class AddEdit extends React.Component{
     this.state = {
       type: 'add'
     };
+
+    this.routines  = this.routines.bind(this);
+    // this.checkRtnAchv = this.checkRtnAchv.bind(this);
+    // this.newRoutine = this.newRoutine.bind(this);
+    // this.newAchievement = this.newAchievement.bind(this);
   }
+
+  routines(){
+    const routines = Object.keys(this.props.routines).map((id)=>(
+      <div>
+          <label onClick={this.checkRtnAchv}>
+            <input id="checkBox" type="checkbox"/>
+            {this.props.routines[id].name}
+          </label>
+
+      </div>
+    ));
+    return routines;
+  }
+
+  // newRoutine(){
+  //
+  // }
+  //
+  // newAchievement(){
+  //
+  // }
+
+
 
   render(){
     let type;
@@ -22,9 +50,17 @@ class AddEdit extends React.Component{
       type = <h1>default add achievement</h1>;
     }
 
+    let routines = this.routines();
+
     return(
       <div className='addedit'>
-        {type}
+        <div clasName='add'>
+          <button onClick={this.newRoutine}>New Routine</button>
+          <button onClick={this.newAchievement}>New Achievement</button>
+        </div>
+        <div className='routines'>
+          {routines}
+        </div>
       </div>
     );
   }

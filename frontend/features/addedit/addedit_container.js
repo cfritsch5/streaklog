@@ -2,8 +2,10 @@ import { connect } from 'react-redux';
 import AddEdit from './addedit';
 
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state) => {
+  return {
+    routines: state.routines
+  };
 };
 
 const mapDispatchToProps = (dispatch, { location }) => {
