@@ -5,6 +5,7 @@ class Api::AchievementsController < ApplicationController
       render 'api/achievements/show'
     else
       render json: @achievement.errors.full_messages, status: 422
+    end
   end
 
   def destroy
@@ -15,7 +16,13 @@ class Api::AchievementsController < ApplicationController
 
   def index
     @achievements = current_user.achievements
-  end 
+    @routines = current_user.routines
+    puts current_user.username
+    puts "ACHIEVEMENTS!!!!!!!!!"
+    puts @achievements
+    puts "Routines >>>>>"
+    puts @routines
+  end
 
   private
   def achievement_params

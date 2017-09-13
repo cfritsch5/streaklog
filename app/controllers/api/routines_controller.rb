@@ -19,9 +19,9 @@ class Api::RoutinesController < ApplicationController
     @routine.update_attributes(routine_params)
   end
 
-  def index
-    @routines = current_user.routines
-  end 
+  # def index
+  #   @routines = current_user.routines
+  # end
 
   private
   def routine_params

@@ -12,6 +12,10 @@ class Avatar extends React.Component{
     };
   }
 
+  componentWillReceiveProps(nextProps){
+    console.log("props", nextProps);
+  }
+
   login(){
     if (this.props.loggedIn){
       this.props.logout();

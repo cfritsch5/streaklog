@@ -1,15 +1,20 @@
 import { connect } from 'react-redux';
 import Streaks from './streaks';
+import {getAchvsAndRoutines} from './streak_actions';
 
 
-const mapStateToProps = ({ streaks }) => {
+const mapStateToProps = (state) => {
   return {
-    streaks
+    loggedIn: Boolean(state.session.currentUser),
+    currentUser: state.session.currentUser,
+    streaks: state.streaks,
   };
 };
 
-const mapDispatchToProps = (dispatch, { location }) => {
-  return {};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAchvsAndRoutines: ()=> dispatch(getAchvsAndRoutines())
+  };
 };
 
 export default connect(

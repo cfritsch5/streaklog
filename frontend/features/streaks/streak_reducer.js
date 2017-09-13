@@ -6,18 +6,33 @@ const DummyStreaks = Object.freeze({
   'Work Out': 6
 });
 
-const SessionReducer = (state = {}, action) => {
+export const AchievementReducer = (state = {}, action) => {
   Object.freeze(state);
   switch(action.type) {
-    case 'DUMMY_STREAKS':
-      return merge({}, DummyStreaks);
     case 'RECEIVE_STREAKS':
       return merge({}, action.streaks);
-    case 'RECEIVE_STREAK':
-      return merge({}, state, action.streak);
+    default:
+      return state;
+  }
+};
+export default AchievementReducer;
+export const RoutineReducer = (state = {}, action) => {
+  Object.freeze(state);
+  switch(action.type) {
+    case 'RECEIVE_STREAKS':
+      return merge({}, action.routines);
     default:
       return state;
   }
 };
 
-export default SessionReducer;
+export const StreakReducer = (state = {}, action) => {
+  Object.freeze(state);
+  switch(action.type) {
+    case 'RECEIVE_STREAKS':
+      let streaks;
+      return merge({}, streaks);
+    default:
+      return state;
+  }
+};

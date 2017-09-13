@@ -25105,20 +25105,24 @@ var _streaks = __webpack_require__(233);
 
 var _streaks2 = _interopRequireDefault(_streaks);
 
+var _streak_actions = __webpack_require__(250);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapStateToProps = function mapStateToProps(_ref) {
-  var streaks = _ref.streaks;
-
+var mapStateToProps = function mapStateToProps(state) {
   return {
-    streaks: streaks
+    loggedIn: Boolean(state.session.currentUser),
+    currentUser: state.session.currentUser,
+    streaks: state.streaks
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch, _ref2) {
-  var location = _ref2.location;
-
-  return {};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    getAchvsAndRoutines: function getAchvsAndRoutines() {
+      return dispatch((0, _streak_actions.getAchvsAndRoutines)());
+    }
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_streaks2.default);
@@ -25161,17 +25165,36 @@ var Streaks = function (_React$Component) {
   }
 
   _createClass(Streaks, [{
-    key: 'streaks',
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      console.log("mount streaks");
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      console.log("next");
+      if (nextProps.loggedIn) {
+        console.log("loggedIn");
+        this.props.getAchvsAndRoutines();
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log("did");
+    }
+  }, {
+    key: "streaks",
     value: function streaks() {
       var streaks = [];
       for (var i = 0; i < 5; i++) {
         streaks.push(_react2.default.createElement(
-          'div',
-          { className: 'streak' },
+          "div",
+          { className: "streak" },
           _react2.default.createElement(
-            'h4',
+            "h4",
             null,
-            'streaks ',
+            "streaks ",
             i
           )
         ));
@@ -25179,12 +25202,13 @@ var Streaks = function (_React$Component) {
       return streaks;
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
+      console.log("streaks render");
       var streaks = this.streaks();
       return _react2.default.createElement(
-        'div',
-        { className: 'streaks' },
+        "div",
+        { className: "streaks" },
         streaks
       );
     }
@@ -25284,6 +25308,11 @@ var Avatar = function (_React$Component) {
   }
 
   _createClass(Avatar, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      console.log("props", nextProps);
+    }
+  }, {
     key: 'login',
     value: function login() {
       if (this.props.loggedIn) {
@@ -25465,10 +25494,22 @@ var _session_reducer = __webpack_require__(245);
 
 var _session_reducer2 = _interopRequireDefault(_session_reducer);
 
+var _streak_reducer = __webpack_require__(251);
+
+var _streak_reducer2 = _interopRequireDefault(_streak_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import {
+//         RoutinesReducer,
+//         StreaksReducer
+//         } from './features/streaks/streak_reducer';
+
 var RootReducer = (0, _redux.combineReducers)({
-  session: _session_reducer2.default
+  session: _session_reducer2.default,
+  achievements: _streak_reducer2.default,
+  routines: _streak_reducer2.default,
+  streaks: _streak_reducer2.default
 });
 
 exports.default = RootReducer;
@@ -42962,6 +43003,108 @@ var SessionForm = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = SessionForm;
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var receiveStreaks = exports.receiveStreaks = function receiveStreaks(achvsAndRoutines) {
+  return {
+    type: 'RECEIVE_STREAKS',
+    routines: achvsAndRoutines.routines,
+    achievements: achvsAndRoutines.achievements
+  };
+};
+
+var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
+  return {
+    type: 'RECEIVE_ERRORS',
+    errors: errors
+  };
+};
+
+var getAchvsAndRoutines = exports.getAchvsAndRoutines = function getAchvsAndRoutines() {
+  return function (dispatch) {
+    return apiGetAchvsAndRoutines().then(function (achvsAndRoutines) {
+      return dispatch(receiveStreaks(achvsAndRoutines));
+    }, function (err) {
+      return dispatch(receiveErrors(err.responseJSON));
+    });
+  };
+};
+
+var apiGetAchvsAndRoutines = exports.apiGetAchvsAndRoutines = function apiGetAchvsAndRoutines(userId) {
+  return $.ajax({
+    method: 'GET',
+    url: '/api/achievements'
+  });
+};
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StreakReducer = exports.RoutineReducer = exports.AchievementReducer = undefined;
+
+var _lodash = __webpack_require__(244);
+
+var DummyStreaks = Object.freeze({
+  'Take Vitamins': 10,
+  'Take Medication': 8,
+  'Work Out': 6
+});
+
+var AchievementReducer = exports.AchievementReducer = function AchievementReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(state);
+  switch (action.type) {
+    case 'RECEIVE_STREAKS':
+      return (0, _lodash.merge)({}, action.streaks);
+    default:
+      return state;
+  }
+};
+exports.default = AchievementReducer;
+var RoutineReducer = exports.RoutineReducer = function RoutineReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(state);
+  switch (action.type) {
+    case 'RECEIVE_STREAKS':
+      return (0, _lodash.merge)({}, action.routines);
+    default:
+      return state;
+  }
+};
+
+var StreakReducer = exports.StreakReducer = function StreakReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(state);
+  switch (action.type) {
+    case 'RECEIVE_STREAKS':
+      var streaks = void 0;
+      return (0, _lodash.merge)({}, streaks);
+    default:
+      return state;
+  }
+};
 
 /***/ })
 /******/ ]);
