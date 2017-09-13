@@ -1,18 +1,14 @@
 import { combineReducers } from 'redux';
 import SessionReducer from './features/avatar/session/session_reducer';
-import AchievementsReducer from './features/streaks/streak_reducer';
-import RoutinesReducer from './features/streaks/streak_reducer';
-import StreaksReducer from './features/streaks/streak_reducer';
-// import {
-//         RoutinesReducer,
-//         StreaksReducer
-//         } from './features/streaks/streak_reducer';
+import AchievementReducer from './features/streaks/achievement_reducer';
+import RoutineReducer from './features/streaks/routine_reducer';
+import StreakReducer from './features/streaks/streak_reducer';
 
 const RootReducer = combineReducers({
   session: SessionReducer,
-  achievements: AchievementsReducer,
-  routines: RoutinesReducer,
-  streaks: StreaksReducer
+  achievements: AchievementReducer,
+  routines: RoutineReducer,
+  streaks: StreakReducer
 });
 
 export default RootReducer;

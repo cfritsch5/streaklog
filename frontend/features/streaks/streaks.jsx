@@ -8,16 +8,18 @@ class Streaks extends React.Component{
 
   componentWillMount(){
     console.log("mount streaks");
-  }
-  componentWillReceiveProps(nextProps){
-    console.log("next");
-    if (nextProps.loggedIn){
+    if (this.props.loggedIn){
       console.log("loggedIn");
       this.props.getAchvsAndRoutines();
     }
   }
-  componentDidMount(){
-    console.log("did");
+
+  componentWillReceiveProps(nextProps){
+    console.log("next");
+    if (nextProps.loggedIn && !this.props.loggedIn){
+      console.log("loggedIn");
+      this.props.getAchvsAndRoutines();
+    }
   }
 
   streaks() {

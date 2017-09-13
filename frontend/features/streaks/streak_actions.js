@@ -1,11 +1,12 @@
 export const receiveStreaks = achvsAndRoutines => ({
   type: 'RECEIVE_STREAKS',
   routines: achvsAndRoutines.routines,
-  achievements: achvsAndRoutines.achievements
+  achievements: achvsAndRoutines.achievements,
+  streaks: achvsAndRoutines.streaks
 });
 
-export const receiveErrors = errors => ({
-  type: 'RECEIVE_ERRORS',
+export const receiveStreakErrors = errors => ({
+  type: 'RECEIVE_STREAK_ERRORS',
   errors
 });
 
@@ -13,7 +14,7 @@ export const getAchvsAndRoutines = () => dispatch => (
   apiGetAchvsAndRoutines().then(achvsAndRoutines => (
     dispatch(receiveStreaks(achvsAndRoutines))
   ), err => (
-    dispatch(receiveErrors(err.responseJSON))
+    dispatch(receiveStreakErrors(err.responseJSON))
   ))
 );
 

@@ -17,11 +17,13 @@ class Api::AchievementsController < ApplicationController
   def index
     @achievements = current_user.achievements
     @routines = current_user.routines
-    puts current_user.username
-    puts "ACHIEVEMENTS!!!!!!!!!"
-    puts @achievements
-    puts "Routines >>>>>"
-    puts @routines
+    @streaks = []
+    @achievements.each do |achv|
+      if achv.routine
+        @streaks.push({achievement: achv.id, routine: achv.routine.id})
+      end
+    end
+    # p "STREAKS!!!!!!!!!!!", @streaks
   end
 
   private

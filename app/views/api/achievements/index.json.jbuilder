@@ -8,6 +8,14 @@ json.set! 'achievements' do
 end
 json.set! 'routines' do
   @routines.each do |routine|
-    json.extract! routine, :id, :achievement_id, :name
+    json.set! routine.id do
+      json.name routine.name
+    end
+  end
+end
+
+json.set! 'streaks' do
+  json.array! @streaks do |streak|
+    json.set! streak[:achievement], streak[:routine]
   end
 end

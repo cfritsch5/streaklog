@@ -25168,20 +25168,19 @@ var Streaks = function (_React$Component) {
     key: "componentWillMount",
     value: function componentWillMount() {
       console.log("mount streaks");
-    }
-  }, {
-    key: "componentWillReceiveProps",
-    value: function componentWillReceiveProps(nextProps) {
-      console.log("next");
-      if (nextProps.loggedIn) {
+      if (this.props.loggedIn) {
         console.log("loggedIn");
         this.props.getAchvsAndRoutines();
       }
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log("did");
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      console.log("next");
+      if (nextProps.loggedIn && !this.props.loggedIn) {
+        console.log("loggedIn");
+        this.props.getAchvsAndRoutines();
+      }
     }
   }, {
     key: "streaks",
@@ -25494,21 +25493,24 @@ var _session_reducer = __webpack_require__(245);
 
 var _session_reducer2 = _interopRequireDefault(_session_reducer);
 
+var _achievement_reducer = __webpack_require__(252);
+
+var _achievement_reducer2 = _interopRequireDefault(_achievement_reducer);
+
+var _routine_reducer = __webpack_require__(253);
+
+var _routine_reducer2 = _interopRequireDefault(_routine_reducer);
+
 var _streak_reducer = __webpack_require__(251);
 
 var _streak_reducer2 = _interopRequireDefault(_streak_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import {
-//         RoutinesReducer,
-//         StreaksReducer
-//         } from './features/streaks/streak_reducer';
-
 var RootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
-  achievements: _streak_reducer2.default,
-  routines: _streak_reducer2.default,
+  achievements: _achievement_reducer2.default,
+  routines: _routine_reducer2.default,
   streaks: _streak_reducer2.default
 });
 
@@ -42631,6 +42633,7 @@ var SessionReducer = function SessionReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : nullUser;
   var action = arguments[1];
 
+  console.log(state);
   Object.freeze(state);
   switch (action.type) {
     case _session_actions.RECEIVE_CURRENT_USER:
@@ -43018,13 +43021,14 @@ var receiveStreaks = exports.receiveStreaks = function receiveStreaks(achvsAndRo
   return {
     type: 'RECEIVE_STREAKS',
     routines: achvsAndRoutines.routines,
-    achievements: achvsAndRoutines.achievements
+    achievements: achvsAndRoutines.achievements,
+    streaks: achvsAndRoutines.streaks
   };
 };
 
-var receiveErrors = exports.receiveErrors = function receiveErrors(errors) {
+var receiveStreakErrors = exports.receiveStreakErrors = function receiveStreakErrors(errors) {
   return {
-    type: 'RECEIVE_ERRORS',
+    type: 'RECEIVE_STREAK_ERRORS',
     errors: errors
   };
 };
@@ -43034,7 +43038,7 @@ var getAchvsAndRoutines = exports.getAchvsAndRoutines = function getAchvsAndRout
     return apiGetAchvsAndRoutines().then(function (achvsAndRoutines) {
       return dispatch(receiveStreaks(achvsAndRoutines));
     }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+      return dispatch(receiveStreakErrors(err.responseJSON));
     });
   };
 };
@@ -43056,7 +43060,38 @@ var apiGetAchvsAndRoutines = exports.apiGetAchvsAndRoutines = function apiGetAch
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.StreakReducer = exports.RoutineReducer = exports.AchievementReducer = undefined;
+exports.StreakReducer = undefined;
+
+var _lodash = __webpack_require__(244);
+
+var StreakReducer = exports.StreakReducer = function StreakReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  console.log("streak reducer");
+  Object.freeze(state);
+  switch (action.type) {
+
+    case 'RECEIVE_STREAKS':
+      return (0, _lodash.merge)({}, action.streaks);
+    default:
+      return state;
+  }
+};
+
+exports.default = StreakReducer;
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AchievementReducer = undefined;
 
 var _lodash = __webpack_require__(244);
 
@@ -43070,19 +43105,36 @@ var AchievementReducer = exports.AchievementReducer = function AchievementReduce
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
+  console.log("achievement reducer");
   Object.freeze(state);
   switch (action.type) {
     case 'RECEIVE_STREAKS':
-      return (0, _lodash.merge)({}, action.streaks);
+      return (0, _lodash.merge)({}, action.achievements);
     default:
       return state;
   }
 };
 exports.default = AchievementReducer;
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RoutineReducer = undefined;
+
+var _lodash = __webpack_require__(244);
+
 var RoutineReducer = exports.RoutineReducer = function RoutineReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
+  console.log("routine reducer");
   Object.freeze(state);
   switch (action.type) {
     case 'RECEIVE_STREAKS':
@@ -43091,20 +43143,7 @@ var RoutineReducer = exports.RoutineReducer = function RoutineReducer() {
       return state;
   }
 };
-
-var StreakReducer = exports.StreakReducer = function StreakReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments[1];
-
-  Object.freeze(state);
-  switch (action.type) {
-    case 'RECEIVE_STREAKS':
-      var streaks = void 0;
-      return (0, _lodash.merge)({}, streaks);
-    default:
-      return state;
-  }
-};
+exports.default = RoutineReducer;
 
 /***/ })
 /******/ ]);
