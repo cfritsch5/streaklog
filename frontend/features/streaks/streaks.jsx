@@ -7,35 +7,49 @@ class Streaks extends React.Component{
   }
 
   componentWillMount(){
-    console.log("mount streaks");
+    // console.log("mount streaks");
     if (this.props.loggedIn){
-      console.log("loggedIn");
+      // console.log("loggedIn");
       this.props.getAchvsAndRoutines();
     }
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("next");
+    // console.log("next");
     if (nextProps.loggedIn && !this.props.loggedIn){
-      console.log("loggedIn");
+      // console.log("loggedIn");
       this.props.getAchvsAndRoutines();
     }
   }
 
   streaks() {
     let streaks = [];
-    for(let i = 0; i < 5; i++){
-      streaks.push(
-        <div className='streak'>
-          <h4>streaks {i}</h4>
-        </div>
-      );
-    }
+    streaks = Object.keys(this.props.streaks).map((id)=>{
+      let streak = this.props.streaks[id];
+      let achv = this.props.achievements[streak.achv];
+      let rtn = this.props.routines[streak.rtn];
+      // console.log(achv);
+      // let bars = Object.keys(streak.days).map((day)=>{
+      //   let status = streak.days[day] > 0 ? "checked" : "unchecked";
+      //   return (
+      //     <div key={day} className={status}></div>
+      //   );
+      // });
+      let colors = ['red','orange','yellow','green','blue','purple'];
+        return (<div key={id} className='streak'
+         style={{
+           width: `${streak.days.length*10}%`,
+           background: colors[id]
+         }}>
+          <h4>{achv.name}</h4>
+        </div>);
+    });
+    console.log(streaks);
     return streaks;
   }
 
   render(){
-    console.log("streaks render");
+    // console.log("streaks render");
     let streaks = this.streaks();
     return(
       <div className='streaks'>

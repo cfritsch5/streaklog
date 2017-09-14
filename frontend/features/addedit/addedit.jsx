@@ -16,12 +16,11 @@ class AddEdit extends React.Component{
 
   routines(){
     const routines = Object.keys(this.props.routines).map((id)=>(
-      <div>
+      <div key={id}>
           <label onClick={this.checkRtnAchv}>
             <input id="checkBox" type="checkbox"/>
             {this.props.routines[id].name}
           </label>
-
       </div>
     ));
     return routines;
@@ -54,7 +53,7 @@ class AddEdit extends React.Component{
 
     return(
       <div className='addedit'>
-        <div clasName='add'>
+        <div className='add'>
           <button onClick={this.newRoutine}>New Routine</button>
           <button onClick={this.newAchievement}>New Achievement</button>
         </div>

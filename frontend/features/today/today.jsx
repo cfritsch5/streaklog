@@ -9,9 +9,9 @@ class Today extends React.Component{
   renderAchievemets() {
     return(
       <ul>
-        {this.props.achievements.map((achievement, i) => (
-          <li key={`achievement-${i}`}>
-            {achievement}
+        {Object.keys(this.props.achievements).map((id) => (
+          <li key={id} >
+            {this.props.achievements[id].name}
           </li>
         ))}
       </ul>
@@ -19,10 +19,11 @@ class Today extends React.Component{
   }
 
   render(){
+    let achvs = this.renderAchievemets();
     return(
       <div className='today'>
           <h1>today</h1>
-          {'this.renderAchievemets()'}
+          {achvs}
       </div>
     );
   }

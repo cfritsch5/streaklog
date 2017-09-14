@@ -1,8 +1,13 @@
 import {merge} from 'lodash';
 
+const defaultStreaks = {
+  0: {achv:2, rtn:2, days: [1,1,1,1,1]},
+  1: {achv:3, rtn:3, days: [1,1,1,1,1,1,1,1]},
+  2: {achv:1, rtn:1, days: [0,1,1,1]},
+};
 
-export const StreakReducer = (state = {}, action) => {
-  console.log("streak reducer");
+export const StreakReducer = (state = defaultStreaks, action) => {
+  // console.log("streak reducer");
   Object.freeze(state);
   switch(action.type) {
 
