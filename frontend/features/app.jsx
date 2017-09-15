@@ -19,6 +19,7 @@ import AvatarContainer from './avatar/avatar_container';
 
 const App = () => (
   <div>
+    <img className="background" src="assets/starrynigh.jpg"/>
     <div className='top'>
       <StreaksContainer />
       <AvatarContainer />

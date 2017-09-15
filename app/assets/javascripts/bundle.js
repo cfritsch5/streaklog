@@ -40669,6 +40669,7 @@ var App = function App() {
   return _react2.default.createElement(
     'div',
     null,
+    _react2.default.createElement('img', { className: 'background', src: 'assets/starrynigh.jpg' }),
     _react2.default.createElement(
       'div',
       { className: 'top' },
@@ -42097,16 +42098,16 @@ var Today = function (_React$Component) {
   }
 
   _createClass(Today, [{
-    key: 'renderAchievemets',
+    key: "renderAchievemets",
     value: function renderAchievemets() {
       var _this2 = this;
 
       return _react2.default.createElement(
-        'ul',
+        "ul",
         null,
         Object.keys(this.props.achievements).map(function (id) {
           return _react2.default.createElement(
-            'li',
+            "li",
             { key: id },
             _this2.props.achievements[id].name
           );
@@ -42114,18 +42115,43 @@ var Today = function (_React$Component) {
       );
     }
   }, {
-    key: 'render',
+    key: "encouragement",
+    value: function encouragement() {
+      var length = Object.keys(this.props.achievements).length;
+      console.log(length, "length");
+      switch (true) {
+        case length >= 8:
+          return "Stellar!";
+        case length >= 6:
+          return "Your Rocking It!";
+        case length >= 4:
+          return "Look At You Go";
+        case length >= 2:
+          return "On Roll!";
+        case length >= 1:
+          return "Nice Job Keep 'Em Coming!";
+        default:
+          return "Do your Best!";
+      }
+    }
+  }, {
+    key: "render",
     value: function render() {
       var achvs = this.renderAchievemets();
+      var encouragement = this.encouragement();
       return _react2.default.createElement(
-        'div',
-        { className: 'today' },
+        "div",
+        { className: "today" },
         _react2.default.createElement(
-          'h1',
-          null,
-          'today'
-        ),
-        achvs
+          "div",
+          { className: "content" },
+          _react2.default.createElement(
+            "h1",
+            null,
+            encouragement
+          ),
+          achvs
+        )
       );
     }
   }]);
@@ -42202,13 +42228,15 @@ var AddEdit = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (AddEdit.__proto__ || Object.getPrototypeOf(AddEdit)).call(this, props));
 
     _this.state = {
-      type: 'add'
+      type: 'add',
+      addAch: false
     };
 
     _this.routines = _this.routines.bind(_this);
     // this.checkRtnAchv = this.checkRtnAchv.bind(this);
     // this.newRoutine = this.newRoutine.bind(this);
-    // this.newAchievement = this.newAchievement.bind(this);
+    _this.newAchievement = _this.newAchievement.bind(_this);
+    _this.addAchievement = _this.addAchievement.bind(_this);
     return _this;
   }
 
@@ -42231,16 +42259,44 @@ var AddEdit = function (_React$Component) {
       });
       return routines;
     }
+  }, {
+    key: 'newAchievement',
+    value: function newAchievement() {
+      var _this3 = this;
 
-    // newRoutine(){
-    //
-    // }
-    //
-    // newAchievement(){
-    //
-    // }
-
-
+      var flipstate = function flipstate() {
+        return _this3.setState({ addAch: !_this3.state.addAch });
+      };
+      if (this.state.addAch) {
+        console.log(this.state.addAch);
+        return _react2.default.createElement(
+          'div',
+          { className: 'addrtn' },
+          _react2.default.createElement(
+            'form',
+            { onSubmit: this.addAchievement },
+            _react2.default.createElement('input', { type: 'text',
+              name: 'name',
+              placeholder: 'Achievement Name',
+              className: ''
+            }),
+            _react2.default.createElement('button', { type: 'submit' })
+          )
+        );
+      } else {
+        return _react2.default.createElement(
+          'button',
+          { onClick: flipstate },
+          'New Routine'
+        );
+      }
+    }
+  }, {
+    key: 'addAchievement',
+    value: function addAchievement(e) {
+      e.preventDefault();
+      // console.log("addAchievement", e.currentTarget.name.value);
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -42267,30 +42323,24 @@ var AddEdit = function (_React$Component) {
             'default add achievement'
           );
       }
-
       var routines = this.routines();
-
+      var addAch = this.newAchievement();
       return _react2.default.createElement(
         'div',
         { className: 'addedit' },
         _react2.default.createElement(
           'div',
-          { className: 'add' },
+          { className: 'content' },
           _react2.default.createElement(
-            'button',
-            { onClick: this.newRoutine },
-            'New Routine'
+            'div',
+            { className: 'add' },
+            addAch
           ),
           _react2.default.createElement(
-            'button',
-            { onClick: this.newAchievement },
-            'New Achievement'
+            'div',
+            { className: 'routines' },
+            routines
           )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'routines' },
-          routines
         )
       );
     }
@@ -42605,10 +42655,10 @@ var Avatar = function (_React$Component) {
   }, {
     key: 'dropdown',
     value: function dropdown() {
-      // <div className="dropdown" onMouseLeave={this.close}>
+      // <div className="dropdown">
       return _react2.default.createElement(
         'div',
-        { className: 'dropdown' },
+        { className: 'dropdown', onMouseLeave: this.close },
         _react2.default.createElement(
           'div',
           { className: 'dropdown-content' },
@@ -42657,7 +42707,7 @@ var Avatar = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'avatar-content' },
-          _react2.default.createElement('img', { src: 'assets/spark.jpg' }),
+          _react2.default.createElement('img', { className: 'sparky', src: 'assets/spark.jpg' }),
           _react2.default.createElement(
             'div',
             { className: 'avatar-overlay' },
@@ -43209,9 +43259,9 @@ exports.StreakReducer = undefined;
 var _lodash = __webpack_require__(35);
 
 var defaultStreaks = {
-  0: { achv: 2, rtn: 2, days: [1, 1, 1, 1, 1] },
-  1: { achv: 3, rtn: 3, days: [1, 1, 1, 1, 1, 1, 1, 1] },
-  2: { achv: 1, rtn: 1, days: [0, 1, 1, 1] }
+  0: { achv: 2, rtn: 2, days: 5 },
+  1: { achv: 3, rtn: 3, days: 8 },
+  2: { achv: 1, rtn: 1, days: 4 }
 };
 
 var StreakReducer = exports.StreakReducer = function StreakReducer() {
