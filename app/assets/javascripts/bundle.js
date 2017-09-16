@@ -42285,7 +42285,9 @@ var AddEdit = function (_React$Component) {
       var _this2 = this;
 
       var routines = [];
+      var checked = 'off';
       Object.keys(this.props.routines).forEach(function (id) {
+        checked = _this2.state.routinesState[id] ? 'checked' : '';
         routines.push(_react2.default.createElement(
           'div',
           { key: id },
@@ -42295,6 +42297,7 @@ var AddEdit = function (_React$Component) {
             _react2.default.createElement('input', { name: id,
               id: 'checkBox' + id,
               type: 'checkbox',
+              checked: checked,
               disabled: _this2.state.routinesState[id],
               onChange: _this2.checkRtnAchv
             }),
