@@ -42549,28 +42549,38 @@ var Streaks = function (_React$Component) {
   }, {
     key: 'streaks',
     value: function streaks() {
+      var _this2 = this;
+
       var streaks = [];
-      // streaks = Object.keys(this.props.streaks).map((id)=>{
-      //   let streak = this.props.streaks[id];
-      //   let achv = this.props.achievements[streak.achievement];
-      //   let rtn = this.props.routines[streak.routine];
-      //   // console.log(achv);
-      //   // let bars = Object.keys(streak.days).map((day)=>{
-      //   //   let status = streak.days[day] > 0 ? "checked" : "unchecked";
-      //   //   return (
-      //   //     <div key={day} className={status}></div>
-      //   //   );
-      //   // });
-      //   let colors = ['red','orange','yellow','green','blue','purple'];
-      //     return (<div key={id} className='streak'
-      //      style={{
-      //        width: `${streak.currentStreak*10}%`,
-      //        background: colors[id]
-      //      }}>
-      //       <h4>{achv.name}</h4>
-      //     </div>);
-      // });
-      // console.log(streaks);
+      var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+      var i = -1;
+      streaks = Object.keys(this.props.streaks).map(function (id) {
+        var streak = _this2.props.streaks[id];
+        var achv = _this2.props.achievements[streak.achievement] || "blank";
+        var rtn = _this2.props.routines[streak.routine];
+        i++;
+        console.log(achv);
+        // let bars = Object.keys(streak.days).map((day)=>{
+        //   let status = streak.days[day] > 0 ? "checked" : "unchecked";
+        //   return (
+        //     <div key={day} className={status}></div>
+        //   );
+        // });
+        return _react2.default.createElement(
+          'div',
+          { key: id, className: 'streak',
+            style: {
+              width: streak.currentStreak * 10 + '%',
+              background: colors[i]
+            } },
+          _react2.default.createElement(
+            'h4',
+            null,
+            achv.name
+          )
+        );
+      });
+      console.log(streaks);
       return streaks;
     }
   }, {
