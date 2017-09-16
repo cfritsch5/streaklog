@@ -1,7 +1,7 @@
 class Streak < ApplicationRecord
   validates :user_id, presence: true
   validates :name, presence: true, uniqueness: true
-  
+
   # validates :last_achievement, :current_routine, allow_nil: true
   after_create :create_routine
 
@@ -17,11 +17,12 @@ class Streak < ApplicationRecord
   class_name: :Routine,
   optional: true
 
+  attr_accessor :repeats
 
   def create_routine
     routine = Routine.create!(
       streak_id: self.id,
-      repeats: ['whenever']
+      repeats: self.repeats || ['whenever']
     )
 
     self.current_routine_id = routine.id

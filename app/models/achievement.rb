@@ -1,6 +1,7 @@
 class Achievement < ApplicationRecord
-  validates :name, null:false
+  validates :name, presence:true
   belongs_to :streak, optional: true
+
   # has_many :routines, through: :streak
   after_create :connect_streak
   before_validation :series?
@@ -13,8 +14,11 @@ class Achievement < ApplicationRecord
     end
   end
 
+  attr_accessor :repeats
+
   def add_to_series
     self.name = self.streak.name unless self.name
+    self.user_id = self.streak.user_id
   end
 
   def find_series
@@ -40,7 +44,8 @@ class Achievement < ApplicationRecord
       streak = Streak.create!(
       name: self.name,
       user_id: self.user_id,
-      last_achievement_id: self.id
+      last_achievement_id: self.id,
+      repeats: self.repeats || ['?????']
       )
 
       self.streak_id = streak.id
