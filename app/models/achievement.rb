@@ -34,7 +34,7 @@ class Achievement < ApplicationRecord
   end
 
   def connect_streak
-    puts "CONNNECTING errIIIIIEHHHH .... MMM BEEEP beep EIIIIIHHH"
+    # puts "CONNNECTING errIIIIIEHHHH .... MMM BEEEP beep EIIIIIHHH"
     ensure_streak
     self.streak.continued?(self.id)
   end

@@ -5,7 +5,7 @@ class CreateRoutines < ActiveRecord::Migration[5.0]
       t.date  :start_date, null:false
       t.date :end_date
       t.string :repeats, array: true
-      
+
       t.timestamps
     end
   end

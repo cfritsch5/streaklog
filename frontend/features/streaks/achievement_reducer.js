@@ -13,6 +13,8 @@ export const AchievementReducer = (state = defaultAchievements, action) => {
   switch(action.type) {
     case 'RECEIVE_STREAKS':
       return merge({}, action.achievements);
+    case 'RECEIVE_ACHIEVEMENT':
+      return merge({}, action.achievements);
     default:
       return state;
   }

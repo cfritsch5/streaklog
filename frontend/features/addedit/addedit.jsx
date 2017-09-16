@@ -10,28 +10,77 @@ class AddEdit extends React.Component{
     };
 
     this.routines  = this.routines.bind(this);
-    // this.checkRtnAchv = this.checkRtnAchv.bind(this);
-    // this.newRoutine = this.newRoutine.bind(this);
+    this.checkRtnAchv = this.checkRtnAchv.bind(this);
     this.newAchievement = this.newAchievement.bind(this);
     this.addAchievement = this.addAchievement.bind(this);
+    this.setRoutinesState = this.setRoutinesState.bind(this);
+  }
+
+  componentWillMount(){
+    this.setRoutinesState(this.props.routines,
+      this.props.achievements,
+      this.props.streaks
+    );
+  }
+  componentWillReceiveProps(nextProps){
+    this.setRoutinesState(nextProps.routines,
+      nextProps.achievements,
+      nextProps.streaks
+    );
+  }
+
+  setRoutinesState(routines, achievements, streaks){
+    let routinesState = {};
+    let boo = false;
+      Object.keys(routines).forEach((id)=>{
+        boo = false;
+        if (streaks[routines[id].streak_id]){
+          let streak = streaks[routines[id].streak_id];
+          if(achievements[streak.achievement]){
+            let achv = achievements[streak.achievement];
+            boo = true;
+          }
+        }
+        routinesState[id] = boo;
+      });
+
+    this.setState({routinesState});
   }
 
   routines(){
-    const routines = Object.keys(this.props.routines).map((id)=>(
-      <div key={id}>
-          <label onClick={this.checkRtnAchv}>
-            <input id="checkBox" type="checkbox"/>
+    let routines = [];
+    Object.keys(this.props.routines).forEach((id)=>{
+      routines.push(
+        <div key={id}>
+          <label >
+            <input name={id}
+              id={`checkBox${id}`}
+              type="checkbox"
+              disabled={this.state.routinesState[id]}
+              onChange={this.checkRtnAchv}
+              />
+
             {this.props.routines[id].name}
           </label>
-      </div>
-    ));
+        </div>
+      );
+    });
     return routines;
+  }
+
+  checkRtnAchv(e){
+    let id = e.currentTarget.name;
+    let routinesState = this.state.routinesState;
+    routinesState[id] = true;
+    this.setState({routinesState});
+    let streakId = this.props.routines[id].streak_id;
+    let user_id = this.props.currentUser.id;
+    this.props.postAchievement(streakId);
   }
 
   newAchievement(){
     const flipstate = ()=>(this.setState({addAch: !this.state.addAch}));
     if(this.state.addAch){
-      console.log(this.state.addAch);
       return (
         <div className='addrtn'>
           <form onSubmit={this.addAchievement}>
@@ -51,9 +100,8 @@ class AddEdit extends React.Component{
 
   addAchievement(e){
     e.preventDefault();
-    // console.log("addAchievement", e.currentTarget.name.value);
+    console.log("addAchievement", e.currentTarget.name.value);
   }
-
 
   render(){
     let type;

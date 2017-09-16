@@ -36,7 +36,7 @@ class Streak < ApplicationRecord
   # end
 
   def continued?(new_achievement_id)
-    puts " CONTINUED !!!!!! (new_achievement_id)"
+    # puts " CONTINUED !!!!!! (new_achievement_id)"
     routine = current_routine
     if routine.continued?(self.last_achievement_id, new_achievement_id)
       self.current_streak = self.current_streak + 1

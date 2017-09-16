@@ -20,7 +20,7 @@ class Today extends React.Component{
 
   encouragement(){
     const length = Object.keys(this.props.achievements).length;
-    console.log(length,"length");
+    // console.log(length,"length");
     switch (true) {
       case (length >= 8):
         return "Stellar!";

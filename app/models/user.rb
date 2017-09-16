@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :achievements
   has_many :streaks
+  has_many :routines, through: :streaks
 
   attr_reader :password
 

@@ -13,6 +13,8 @@ export const StreakReducer = (state = defaultStreaks, action) => {
 
     case 'RECEIVE_STREAKS':
       return merge({}, action.streaks);
+    case 'RECEIVE_ACHIEVEMENT':
+      return merge({}, action.streaks);
     default:
       return state;
   }

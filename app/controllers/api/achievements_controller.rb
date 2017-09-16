@@ -2,7 +2,10 @@ class Api::AchievementsController < ApplicationController
   def create
     @achievement = Achievement.new(achievement_params)
     if @achievement.save
-      render 'api/achievements/show'
+      @achievements = current_user.achievements
+      @routines = current_user.routines
+      @streaks = current_user.streaks
+      render 'api/streaks/index'
     else
       render json: @achievement.errors.full_messages, status: 422
     end
@@ -17,24 +20,20 @@ class Api::AchievementsController < ApplicationController
   def index
     @achievements = current_user.achievements
     @routines = current_user.routines
-    # @streaks = []
-    # @achievements.each do |achv|
-    #   if achv.routine
-    #     @streaks.push({achievement: achv.id, routine: achv.routine.id})
-    #   end
-    # end
-    # p "STREAKS!!!!!!!!!!!", @streaks
+    @streaks = current_user.streaks
+    render 'api/streaks/index'
+
   end
 
   private
   def achievement_params
+    puts params
     params.require(:achievement).permit(
-    :achievement,
+    :name,
+    :streak_id,
     :user_id,
     :description,
-    :difficulty,
-    :notes,
-    :tags
+    :repeats
     )
   end
 end

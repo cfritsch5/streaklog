@@ -8,10 +8,10 @@ class Routine < ApplicationRecord
   def continued?(new_achv_id, last_achv_id)
     next_date = Achievement.find(new_achv_id).created_at.to_date
     last_date = Achievement.find(last_achv_id).created_at.to_date
-    puts "DATES", next_date, last_date
+    # puts "DATES", next_date, last_date
     self.repeats.all? do |rule|
-      puts "rule", rule
-      p repeat_rules( rule, next_date, last_date)
+      # puts "rule", rule
+      repeat_rules( rule, next_date, last_date)
     end
   end
 

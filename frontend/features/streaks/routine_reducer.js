@@ -12,6 +12,8 @@ export const RoutineReducer = (state = defaultRoutines, action) => {
   switch(action.type) {
     case 'RECEIVE_STREAKS':
       return merge({}, action.routines);
+    case 'RECEIVE_ACHIEVEMENT':
+      return merge({}, action.routines);
     default:
       return state;
   }
