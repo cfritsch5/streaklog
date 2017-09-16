@@ -7,7 +7,7 @@ class User < ApplicationRecord
 	before_validation :ensure_session_token_uniqueness, on: :create
 
   has_many :achievements
-  has_many :routines
+  has_many :streaks
 
   attr_reader :password
 

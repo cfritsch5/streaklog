@@ -17,12 +17,12 @@ class Api::AchievementsController < ApplicationController
   def index
     @achievements = current_user.achievements
     @routines = current_user.routines
-    @streaks = []
-    @achievements.each do |achv|
-      if achv.routine
-        @streaks.push({achievement: achv.id, routine: achv.routine.id})
-      end
-    end
+    # @streaks = []
+    # @achievements.each do |achv|
+    #   if achv.routine
+    #     @streaks.push({achievement: achv.id, routine: achv.routine.id})
+    #   end
+    # end
     # p "STREAKS!!!!!!!!!!!", @streaks
   end
 
