@@ -17,11 +17,25 @@ export const postAchievement = (achv) => dispatch => (
     dispatch(receiveStreakErrors(err.responseJSON))
   ))
 );
+export const postNewAchievement = (achv) => dispatch => (
+  apiPostNewAchievement(achv).then(achvsAndRoutines => (
+    dispatch(receiveAchievement(achvsAndRoutines))
+  ), err => (
+    dispatch(receiveStreakErrors(err.responseJSON))
+  ))
+);
 
 export const apiPostAchievement = (streak_id, user_id) => {
   return $.ajax({
     method: 'POST',
     url: '/api/achievements',
     data: {achievement: {streak_id, user_id}}
+  });
+};
+export const apiPostNewAchievement = (name, user_id) => {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/achievements',
+    data: {achievement: {name, user_id}}
   });
 };

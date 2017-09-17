@@ -19,6 +19,10 @@ body, html, div, h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
+body {
+  font-family: 'Lato', sans-serif;
+}
+
 .login-form, .top, .bottom, .today, .streaks, .addedit, .avatar {
   display: flex;
   /*border: 1px solid grey;*/

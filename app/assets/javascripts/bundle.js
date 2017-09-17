@@ -42229,6 +42229,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// import NewAchievementContainer from './newachievement_container';
+
 var AddEdit = function (_React$Component) {
   _inherits(AddEdit, _React$Component);
 
@@ -42237,15 +42239,8 @@ var AddEdit = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (AddEdit.__proto__ || Object.getPrototypeOf(AddEdit)).call(this, props));
 
-    _this.state = {
-      type: 'add',
-      addAch: false
-    };
-
     _this.routines = _this.routines.bind(_this);
     _this.checkRtnAchv = _this.checkRtnAchv.bind(_this);
-    _this.newAchievement = _this.newAchievement.bind(_this);
-    _this.addAchievement = _this.addAchievement.bind(_this);
     _this.setRoutinesState = _this.setRoutinesState.bind(_this);
     return _this;
   }
@@ -42319,81 +42314,16 @@ var AddEdit = function (_React$Component) {
       this.props.postAchievement(streakId);
     }
   }, {
-    key: 'newAchievement',
-    value: function newAchievement() {
-      var _this3 = this;
-
-      var flipstate = function flipstate() {
-        return _this3.setState({ addAch: !_this3.state.addAch });
-      };
-      if (this.state.addAch) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'addrtn' },
-          _react2.default.createElement(
-            'form',
-            { onSubmit: this.addAchievement },
-            _react2.default.createElement('input', { type: 'text',
-              name: 'name',
-              placeholder: 'Achievement Name',
-              className: ''
-            }),
-            _react2.default.createElement('button', { type: 'submit' })
-          )
-        );
-      } else {
-        return _react2.default.createElement(
-          'button',
-          { onClick: flipstate },
-          'New Routine'
-        );
-      }
-    }
-  }, {
-    key: 'addAchievement',
-    value: function addAchievement(e) {
-      e.preventDefault();
-      console.log("addAchievement", e.currentTarget.name.value);
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var type = void 0;
-      switch (this.state.type) {
-        case 'add_achievemt':
-          type = _react2.default.createElement(
-            'h1',
-            null,
-            'add achievement'
-          );
-          break;
-        case 'add_routine':
-          type = _react2.default.createElement(
-            'h1',
-            null,
-            'add routine'
-          );
-          break;
-        default:
-          type = _react2.default.createElement(
-            'h1',
-            null,
-            'default add achievement'
-          );
-      }
       var routines = this.routines();
-      var addAch = this.newAchievement();
       return _react2.default.createElement(
         'div',
         { className: 'addedit' },
         _react2.default.createElement(
           'div',
           { className: 'content' },
-          _react2.default.createElement(
-            'div',
-            { className: 'add' },
-            addAch
-          ),
+          _react2.default.createElement('div', { className: 'add' }),
           _react2.default.createElement(
             'div',
             { className: 'routines' },
@@ -42444,12 +42374,28 @@ var postAchievement = exports.postAchievement = function postAchievement(achv) {
     });
   };
 };
+var postNewAchievement = exports.postNewAchievement = function postNewAchievement(achv) {
+  return function (dispatch) {
+    return apiPostNewAchievement(achv).then(function (achvsAndRoutines) {
+      return dispatch(receiveAchievement(achvsAndRoutines));
+    }, function (err) {
+      return dispatch(receiveStreakErrors(err.responseJSON));
+    });
+  };
+};
 
 var apiPostAchievement = exports.apiPostAchievement = function apiPostAchievement(streak_id, user_id) {
   return $.ajax({
     method: 'POST',
     url: '/api/achievements',
     data: { achievement: { streak_id: streak_id, user_id: user_id } }
+  });
+};
+var apiPostNewAchievement = exports.apiPostNewAchievement = function apiPostNewAchievement(name, user_id) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/achievements',
+    data: { achievement: { name: name, user_id: user_id } }
   });
 };
 
@@ -43237,11 +43183,9 @@ var _streak_reducer = __webpack_require__(249);
 
 var _streak_reducer2 = _interopRequireDefault(_streak_reducer);
 
-var _addedit_reducer = __webpack_require__(250);
-
-var _addedit_reducer2 = _interopRequireDefault(_addedit_reducer);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import AddEditReducer from './features/addedit/addedit_reducer';
 
 var RootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
@@ -43416,37 +43360,6 @@ var StreakReducer = exports.StreakReducer = function StreakReducer() {
 };
 
 exports.default = StreakReducer;
-
-/***/ }),
-/* 250 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.AddEditReducer = undefined;
-
-var _lodash = __webpack_require__(26);
-
-var AddEditReducer = exports.AddEditReducer = function AddEditReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments[1];
-
-  // console.log("streak reducer");
-  Object.freeze(state);
-  switch (action.type) {
-
-    // case 'RECEIVE_ACHIEVEMENT':
-    //   return merge({}, action);
-    default:
-      return state;
-  }
-};
-
-exports.default = AddEditReducer;
 
 /***/ })
 /******/ ]);
