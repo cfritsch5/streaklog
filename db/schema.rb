@@ -10,42 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170909213755) do
+ActiveRecord::Schema.define(version: 20170915211322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "achievements", force: :cascade do |t|
-    t.string   "achievement", null: false
+    t.string   "name",        null: false
+    t.integer  "streak_id"
     t.integer  "user_id",     null: false
     t.string   "description"
-    t.integer  "difficulty"
-    t.string   "notes"
-    t.string   "tags",                     array: true
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["achievement"], name: "index_achievements_on_achievement", using: :btree
-    t.index ["user_id"], name: "index_achievements_on_user_id", using: :btree
   end
 
   create_table "routines", force: :cascade do |t|
-    t.string   "name",           null: false
-    t.string   "repeats",        null: false, array: true
-    t.integer  "user_id",        null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "achievement_id"
-    t.index ["name"], name: "index_routines_on_name", using: :btree
-    t.index ["user_id"], name: "index_routines_on_user_id", using: :btree
+    t.integer  "streak_id",  null: false
+    t.date     "start_date", null: false
+    t.date     "end_date"
+    t.string   "repeats",                 array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "streaks", force: :cascade do |t|
+    t.string   "name",                            null: false
+    t.integer  "user_id",                         null: false
+    t.integer  "last_achievement_id",             null: false
+    t.integer  "current_streak",      default: 0
+    t.integer  "current_routine_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["name"], name: "index_streaks_on_name", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
     t.string   "email",           null: false
     t.string   "password_digest", null: false
+    t.string   "session_token",   null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "session_token",   null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import AddEdit from './addedit';
-import {postAchievement} from './addedit_actions';
+import NewAchievement from './newachievement';
+import {postNewAchievement} from './addedit_actions';
 
 
 const mapStateToProps = (state) => {
@@ -15,11 +15,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    postAchievement: (achv)=> dispatch(postAchievement(achv))
+    postNewAchievement: (achv)=> dispatch(postNewAchievement(achv))
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddEdit);
+)(NewAchievement);

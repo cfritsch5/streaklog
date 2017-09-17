@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
     loggedIn: Boolean(state.session.currentUser),
     currentUser: state.session.currentUser,
     streaks: state.streaks,
+    achievements: state.achievements,
+    routines: state.routines
   };
 };
 

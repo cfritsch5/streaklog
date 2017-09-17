@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import Today from './today';
 
 
-const mapStateToProps = ({ today }) => {
+const mapStateToProps = ({ achievements }) => {
   return {
-    today
+    achievements: achievements
   };
 };
 

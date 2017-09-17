@@ -1,0 +1,38 @@
+// Place all the styles related to the Api::Streaks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.streak {
+  width: 95%;
+  border-radius: 10em;
+  background: white;
+  margin: 1%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+}
+
+.streak-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+img.onfire {
+    position: absolute;
+    z-index: -1;
+    height: 8%;
+    padding-bottom: 2%;
+}
+.streak-num {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.streak-title {
+  padding-right: 20px;
+}

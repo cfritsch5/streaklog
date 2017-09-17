@@ -7,9 +7,9 @@ class Streaks extends React.Component{
   }
 
   componentWillMount(){
-    console.log("mount streaks");
+    console.log("mount streaks", this.props.streaks);
     if (this.props.loggedIn){
-      console.log("loggedIn");
+      // console.log("loggedIn");
       this.props.getAchvsAndRoutines();
     }
   }
@@ -17,25 +17,55 @@ class Streaks extends React.Component{
   componentWillReceiveProps(nextProps){
     console.log("next");
     if (nextProps.loggedIn && !this.props.loggedIn){
-      console.log("loggedIn");
+      // console.log("loggedIn");
       this.props.getAchvsAndRoutines();
     }
   }
 
+  colors(){
+    let l = Object.keys(this.props.streaks).length;
+    let inc = 300/l;
+    let colors = [];
+    for(let i = 0 ; i < l ; i++){
+      colors.push(`hsla(${i*inc}, 100%, 50%, 1)`);
+    }
+    console.log(colors);
+    return colors;
+  }
+
   streaks() {
     let streaks = [];
-    for(let i = 0; i < 5; i++){
-      streaks.push(
-        <div className='streak'>
-          <h4>streaks {i}</h4>
-        </div>
-      );
-    }
+    // let colors = this.colors();
+    let colors = ['red','orange','yellow','green','blue','purple'];
+    let i = -1;
+    let length = parseInt(150/Object.keys(this.props.streaks).length);
+    streaks = Object.keys(this.props.streaks).map((id)=>{
+      let streak = this.props.streaks[id];
+      let achv = this.props.achievements[streak.achievement] || "blank";
+      let rtn = this.props.routines[streak.routine];
+      i++;
+        return (
+          <div key={id} className="streak-container">
+            <div className='streak'
+              style={{
+                width: `${streak.currentStreak*10}%`,
+                background: colors[i],
+                height: `${length}px`
+              }}>
+              <h4 className="streak-title">{streak.name}</h4>
+          </div>
+          <div className="streak-num">
+            <img className="onfire" src="assets/fire-icons-set.png"/>
+            <h2 className="current-streak-num">{streak.currentStreak}</h2>
+          </div>
+        </div>);
+    });
+    // console.log(streaks);
     return streaks;
   }
 
   render(){
-    console.log("streaks render");
+    console.log("streaks render", this.props.streaks);
     let streaks = this.streaks();
     return(
       <div className='streaks'>

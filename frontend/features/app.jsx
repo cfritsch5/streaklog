@@ -19,6 +19,7 @@ import AvatarContainer from './avatar/avatar_container';
 
 const App = () => (
   <div>
+    <img className="background" src="assets/starrynigh.jpg"/>
     <div className='top'>
       <StreaksContainer />
       <AvatarContainer />
@@ -31,10 +32,7 @@ const App = () => (
 );
 // const App = () => (
 //   <div>
-//     <Switch>
-//       <Route exact path="/" component={HomeContainer} />
-//       <AuthRoute path="/signup" component={SessionFormContainer} />
-//     </Switch>
+//     <h1>broken????</h1>
 //
 //   </div>
 // );

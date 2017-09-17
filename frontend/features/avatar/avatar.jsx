@@ -31,9 +31,9 @@ class Avatar extends React.Component{
   }
 
   dropdown() {
-    // <div className="dropdown" onMouseLeave={this.close}>
+    // <div className="dropdown">
     return (
-      <div className="dropdown">
+      <div className="dropdown" onMouseLeave={this.close}>
         <div className="dropdown-content">
           <SessionFormContainer />
         </div>
@@ -70,7 +70,7 @@ class Avatar extends React.Component{
     return(
       <div className='avatar' >
           <div className="avatar-content">
-            <img src="assets/spark.jpg"/>
+            <img className="sparky" src="assets/spark.jpg"/>
             <div className="avatar-overlay">
               {dropdown}
             </div>

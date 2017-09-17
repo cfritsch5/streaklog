@@ -66,9 +66,9 @@ class SessionForm extends React.Component {
 
   renderErrors() {
     if (this.props.errors.length === 0) {
-      console.log("err true");
+      // console.log("err true");
     } else {
-      console.log("err flase");
+      // console.log("err flase");
     }
     return(
       <ul>
@@ -121,7 +121,7 @@ class SessionForm extends React.Component {
             <button className=""
               onClick={this.handleLogin}
               value='login'>Login</button>
-            <button className="" 
+            <button className=""
               onClick={this.handleSignup}
               value='signup'>signup</button>
           </div>
