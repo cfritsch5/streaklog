@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { location }) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     postNewAchievement: (achv)=> dispatch(postNewAchievement(achv))
   };

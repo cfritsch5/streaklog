@@ -32,10 +32,7 @@ const App = () => (
 );
 // const App = () => (
 //   <div>
-//     <Switch>
-//       <Route exact path="/" component={HomeContainer} />
-//       <AuthRoute path="/signup" component={SessionFormContainer} />
-//     </Switch>
+//     <h1>broken????</h1>
 //
 //   </div>
 // );

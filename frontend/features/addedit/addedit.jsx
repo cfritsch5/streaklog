@@ -1,5 +1,5 @@
 import React from 'react';
-// import NewAchievementContainer from './newachievement_container';
+import NewAchievementContainer from './newachievement_container';
 
 class AddEdit extends React.Component{
   constructor(props){
@@ -71,7 +71,6 @@ class AddEdit extends React.Component{
     routinesState[id] = true;
     this.setState({routinesState});
     let streakId = this.props.routines[id].streak_id;
-    let user_id = this.props.currentUser.id;
     this.props.postAchievement(streakId);
   }
 
@@ -81,6 +80,7 @@ class AddEdit extends React.Component{
       <div className='addedit'>
         <div className='content'>
           <div className='add'>
+            <NewAchievementContainer/>
           </div>
           <div className='routines'>
             {routines}

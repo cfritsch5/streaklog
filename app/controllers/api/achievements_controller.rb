@@ -1,5 +1,6 @@
 class Api::AchievementsController < ApplicationController
   def create
+    params[:achievement][:user_id] = current_user.id
     @achievement = Achievement.new(achievement_params)
     if @achievement.save
       @achievements = current_user.achievements
@@ -22,7 +23,6 @@ class Api::AchievementsController < ApplicationController
     @routines = current_user.routines
     @streaks = current_user.streaks
     render 'api/streaks/index'
-
   end
 
   private
