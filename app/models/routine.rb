@@ -17,7 +17,7 @@ class Routine < ApplicationRecord
 
   private
   def set_start_date
-    self.start_date = Date.today
+    self.start_date = Date.current
   end
 
   def repeat_rules(rule, next_date, last_date)
@@ -52,7 +52,7 @@ class Routine < ApplicationRecord
     other_routines.each do |routine|
       next if routine.id == self.id
       if routine.end_date.nil? || routine.end_date > Date.current
-        routine.end_date = Date.today - 1
+        routine.end_date = Date.current - 1
         routine.save
       end
     end

@@ -50,13 +50,6 @@ body, html, div, h1, h2, h3, h4, h5, h6 {
   justify-content: flex-start;
 }
 
-.streak {
-  width: 95%;
-  border-radius: 10em;
-  background: green;
-  margin: 1%;
-}
-
 .sparky {
   width: 80%;
   border-radius: 25px;

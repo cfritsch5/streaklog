@@ -9,8 +9,7 @@ const RootReducer = combineReducers({
   session: SessionReducer,
   achievements: AchievementReducer,
   routines: RoutineReducer,
-  streaks: StreakReducer,
-  newAchievements: AddEditReducer
+  streaks: StreakReducer
 });
 
 export default RootReducer;

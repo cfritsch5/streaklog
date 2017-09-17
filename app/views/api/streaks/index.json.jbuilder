@@ -1,7 +1,7 @@
 json.set! 'achievements' do
   @achievements.each do |achv|
     # puts "do i work????"
-    if achv.created_at.to_date == Date.today
+    if achv.created_at.to_date == Date.current
       json.set! achv.id do
         json.id achv.id
         json.name achv.name
@@ -26,7 +26,7 @@ end
 json.set! 'routines' do
   @routines.each do |routine|
     # puts "do i work????"
-    if routine.end_date.nil? || routine.end_date > Date.today
+    if routine.end_date.nil? || routine.end_date > Date.current
       json.set! routine.id do
         json.id routine.id
         json.streak_id routine.streak_id

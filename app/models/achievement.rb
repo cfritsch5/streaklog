@@ -7,6 +7,7 @@ class Achievement < ApplicationRecord
   before_validation :series?
 
   def series?
+    # debugger
     if self.streak_id
       add_to_series
     else

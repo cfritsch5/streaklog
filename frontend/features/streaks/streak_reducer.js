@@ -1,9 +1,9 @@
 import {merge} from 'lodash';
 
 const defaultStreaks = {
-  0: {achv:2, rtn:2, days: 5},
-  1: {achv:3, rtn:3, days: 8},
-  2: {achv:1, rtn:1, days: 4},
+  0: {name: "Take Vitamins", achievement:2, routine:2, currentStreak: 5},
+  1: {name: "Fed Vitamins (The Dragon)", achievement:3, routine:3, currentStreak: 8},
+  2: {name: "Do Yoga", achievement:1, routine:1, currentStreak: 4},
 };
 
 export const StreakReducer = (state = defaultStreaks, action) => {

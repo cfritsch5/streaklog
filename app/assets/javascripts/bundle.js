@@ -42532,68 +42532,90 @@ var Streaks = function (_React$Component) {
   }
 
   _createClass(Streaks, [{
-    key: 'componentWillMount',
+    key: "componentWillMount",
     value: function componentWillMount() {
-      // console.log("mount streaks");
+      console.log("mount streaks", this.props.streaks);
       if (this.props.loggedIn) {
         // console.log("loggedIn");
         this.props.getAchvsAndRoutines();
       }
     }
   }, {
-    key: 'componentWillReceiveProps',
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
-      // console.log("next");
+      console.log("next");
       if (nextProps.loggedIn && !this.props.loggedIn) {
         // console.log("loggedIn");
         this.props.getAchvsAndRoutines();
       }
     }
   }, {
-    key: 'streaks',
+    key: "colors",
+    value: function colors() {
+      var l = Object.keys(this.props.streaks).length;
+      var inc = 300 / l;
+      var colors = [];
+      for (var i = 0; i < l; i++) {
+        colors.push("hsla(" + i * inc + ", 100%, 50%, 1)");
+      }
+      console.log(colors);
+      return colors;
+    }
+  }, {
+    key: "streaks",
     value: function streaks() {
       var _this2 = this;
 
       var streaks = [];
+      // let colors = this.colors();
       var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
       var i = -1;
+      var length = parseInt(150 / Object.keys(this.props.streaks).length);
       streaks = Object.keys(this.props.streaks).map(function (id) {
         var streak = _this2.props.streaks[id];
         var achv = _this2.props.achievements[streak.achievement] || "blank";
         var rtn = _this2.props.routines[streak.routine];
         i++;
-        console.log(achv);
-        // let bars = Object.keys(streak.days).map((day)=>{
-        //   let status = streak.days[day] > 0 ? "checked" : "unchecked";
-        //   return (
-        //     <div key={day} className={status}></div>
-        //   );
-        // });
         return _react2.default.createElement(
-          'div',
-          { key: id, className: 'streak',
-            style: {
-              width: streak.currentStreak * 10 + '%',
-              background: colors[i]
-            } },
+          "div",
+          { key: id, className: "streak-container" },
           _react2.default.createElement(
-            'h4',
-            null,
-            achv.name
+            "div",
+            { className: "streak",
+              style: {
+                width: streak.currentStreak * 10 + "%",
+                background: colors[i],
+                height: length + "px"
+              } },
+            _react2.default.createElement(
+              "h4",
+              { className: "streak-title" },
+              streak.name
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "streak-num" },
+            _react2.default.createElement("img", { className: "onfire", src: "assets/fire-icons-set.png" }),
+            _react2.default.createElement(
+              "h2",
+              { className: "current-streak-num" },
+              streak.currentStreak
+            )
           )
         );
       });
-      console.log(streaks);
+      // console.log(streaks);
       return streaks;
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      // console.log("streaks render");
+      console.log("streaks render", this.props.streaks);
       var streaks = this.streaks();
       return _react2.default.createElement(
-        'div',
-        { className: 'streaks' },
+        "div",
+        { className: "streaks" },
         streaks
       );
     }
@@ -43225,8 +43247,7 @@ var RootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
   achievements: _achievement_reducer2.default,
   routines: _routine_reducer2.default,
-  streaks: _streak_reducer2.default,
-  newAchievements: _addedit_reducer2.default
+  streaks: _streak_reducer2.default
 });
 
 exports.default = RootReducer;
@@ -43372,9 +43393,9 @@ exports.StreakReducer = undefined;
 var _lodash = __webpack_require__(26);
 
 var defaultStreaks = {
-  0: { achv: 2, rtn: 2, days: 5 },
-  1: { achv: 3, rtn: 3, days: 8 },
-  2: { achv: 1, rtn: 1, days: 4 }
+  0: { name: "Take Vitamins", achievement: 2, routine: 2, currentStreak: 5 },
+  1: { name: "Fed Vitamins (The Dragon)", achievement: 3, routine: 3, currentStreak: 8 },
+  2: { name: "Do Yoga", achievement: 1, routine: 1, currentStreak: 4 }
 };
 
 var StreakReducer = exports.StreakReducer = function StreakReducer() {

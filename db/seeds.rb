@@ -15,10 +15,20 @@ user_1 = User.create!(username: 'cfritsch', email: 'caseyfritsch@gmail.com', pas
 # routine_1 = Routine.create!(name:'Take levo', achievement: achievement_1, repeats: ['daily'], user_id: user_1.id)
 # achievement_2 = Achievement.create!(achievement: 'returned sophie\'s email', user_id: user_1.id, difficulty: 5, tags: ['email'])
 
-5.downto(1) do |i|
-  Achievement.create!(name:"take levo", user_id: user_1.id, created_at: Date.today - i, repeats: ["daily"])
+4.downto(1) do |i|
+  Achievement.create!(name:"take levo", user_id: user_1.id, created_at: Date.current - i, repeats: ["daily"])
 end
 
-7.downto(4) do |i|
-  Achievement.create!(name:"eat bananas", user_id: user_1.id, created_at: Date.today - i, repeats: ["whenever"])
+2.downto(1) do |i|
+  Achievement.create!(name:"take vitamin supplment", user_id: user_1.id, created_at: Date.current - i, repeats: ["daily"])
 end
+
+7.downto(1) do |i|
+  Achievement.create!(name:"brush teeth", user_id: user_1.id, created_at: Date.current - i, repeats: ["daily"])
+end
+
+# 6.downto(3) do |i|
+#   Achievement.create!(name:"do yoga", user_id: user_1.id, created_at: Date.current - i, repeats: ["daily"])
+# end
+#
+# Achievement.create!(name:"do yoga", user_id: user_1.id, created_at: Date.current - 1, repeats: ["daily"])
