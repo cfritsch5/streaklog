@@ -9,10 +9,12 @@ class NewAchievement extends React.Component {
     };
     this.newAchievement = this.newAchievement.bind(this);
     this.addAchievement = this.addAchievement.bind(this);
+    this.flipstate = this.flipstate.bind(this);
   }
 
+  flipstate() {this.setState({addAch: !this.state.addAch});}
+
   newAchievement(){
-    const flipstate = ()=>(this.setState({addAch: !this.state.addAch}));
     if(this.state.addAch){
       return (
         <div className='add-new'>
@@ -27,7 +29,7 @@ class NewAchievement extends React.Component {
           </div>
         );
     }else{
-      return(<button onClick={flipstate}>New Achievement</button>);
+      return(<button onClick={this.flipstate}>New Achievement</button>);
     }
   }
 
@@ -35,6 +37,7 @@ class NewAchievement extends React.Component {
     e.preventDefault();
     console.log("addAchievement", e.currentTarget.name.value);
     this.props.postNewAchievement(e.currentTarget.name.value);
+    this.flipstate();
   }
 
   render(){

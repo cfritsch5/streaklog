@@ -43440,17 +43440,18 @@ var NewAchievement = function (_React$Component) {
     };
     _this.newAchievement = _this.newAchievement.bind(_this);
     _this.addAchievement = _this.addAchievement.bind(_this);
+    _this.flipstate = _this.flipstate.bind(_this);
     return _this;
   }
 
   _createClass(NewAchievement, [{
+    key: 'flipstate',
+    value: function flipstate() {
+      this.setState({ addAch: !this.state.addAch });
+    }
+  }, {
     key: 'newAchievement',
     value: function newAchievement() {
-      var _this2 = this;
-
-      var flipstate = function flipstate() {
-        return _this2.setState({ addAch: !_this2.state.addAch });
-      };
       if (this.state.addAch) {
         return _react2.default.createElement(
           'div',
@@ -43473,7 +43474,7 @@ var NewAchievement = function (_React$Component) {
       } else {
         return _react2.default.createElement(
           'button',
-          { onClick: flipstate },
+          { onClick: this.flipstate },
           'New Achievement'
         );
       }
@@ -43484,6 +43485,7 @@ var NewAchievement = function (_React$Component) {
       e.preventDefault();
       console.log("addAchievement", e.currentTarget.name.value);
       this.props.postNewAchievement(e.currentTarget.name.value);
+      this.flipstate();
     }
   }, {
     key: 'render',
