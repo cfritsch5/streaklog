@@ -42397,7 +42397,7 @@ var AddEdit = function (_React$Component) {
             { onClick: function onClick() {
                 return _this3.setState({ add: true });
               } },
-            'addAchievement'
+            'Did the Thing!'
           ),
           _react2.default.createElement(
             'div',
@@ -42491,8 +42491,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import NewRoutineContainer from 'newroutineContainer';
-
 var NewAchievement = function (_React$Component) {
   _inherits(NewAchievement, _React$Component);
 
@@ -42501,87 +42499,17 @@ var NewAchievement = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (NewAchievement.__proto__ || Object.getPrototypeOf(NewAchievement)).call(this, props));
 
-    _this.state = {
-      addAch: false,
-      addRtn: false
-    };
-    // this.newAchievement = this.newAchievement.bind(this);
-    _this.newRoutine = _this.newRoutine.bind(_this);
+    _this.state = {};
     _this.addAchievement = _this.addAchievement.bind(_this);
-    _this.addRoutine = _this.addRoutine.bind(_this);
-    _this.flipstate = _this.flipstate.bind(_this);
     return _this;
   }
 
   _createClass(NewAchievement, [{
-    key: 'flipstate',
-    value: function flipstate(stateSlice) {}
-    // this.setState({[stateSlice]: !this.state[stateSlice]});
-
-    //
-    // newAchievement(){
-    //   if(this.state.addAch){
-    //     return (
-    //       <div className='add-new'>
-    //         <form onSubmit={this.addAchievement}>
-    //           <input type="text"
-    //             name='name'
-    //             placeholder='Achievement Name'
-    //             className=""
-    //             />
-    //           <label>
-    //             Routine?
-    //             <label> Yes
-    //               <input type="radio" name="routine" value="no"/>
-    //             </label>
-    //             <label> No
-    //               <input type="radio" name="routine" value="yes"/>
-    //             </label>
-    //           </label>
-    //
-    //           <button type='submit'>Success!</button>
-    //           </form>
-    //         </div>
-    //       );
-    //   }else{
-    //     return(<button onClick={()=>this.flipstate('addAch')}>
-    // New Achievement</button>);
-    //   }
-    // }
-
-  }, {
     key: 'addAchievement',
     value: function addAchievement(e) {
-      // e.preventDefault();
+      e.preventDefault();
       console.log("addAchievement", e.currentTarget.name.value);
       this.props.postNewAchievement(e.currentTarget.name.value);
-      // this.flipstate('addAch');
-    }
-  }, {
-    key: 'newRoutine',
-    value: function newRoutine() {
-      // if(this.state.addRtn){
-      //   return(
-      //     <div>
-      //       <input name="routineName" placeholder="routineName" type="text"/>
-      //       <label>
-      //         <input type="radio" value="daily" checked="checked"/>
-      //         daily
-      //       </label>
-      //     </div>
-      //   );
-      // }else{
-      //   return <button onClick={()=>(this.flipstate('addRtn'))}>
-      //     New Routine
-      //   </button>;
-      // }
-    }
-  }, {
-    key: 'addRoutine',
-    value: function addRoutine(e) {
-      // console.log("addRoutine", e.currentTarget.name.value);
-      // // this.props.postNewAchievement(e.currentTarget.name.value);
-      // this.flipstate('addRtn');
     }
   }, {
     key: 'render',
@@ -43287,7 +43215,7 @@ var SessionForm = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'bottom' },
+            { className: '' },
             _react2.default.createElement(
               'button',
               { className: '',
@@ -43510,6 +43438,9 @@ var AchievementReducer = exports.AchievementReducer = function AchievementReduce
   // console.log("achievement reducer");
   Object.freeze(state);
   switch (action.type) {
+    case 'RECEIVE_CURRENT_USER':
+      return (0, _lodash.merge)({}, defaultAchievements);
+
     case 'RECEIVE_STREAKS':
       return (0, _lodash.merge)({}, action.achievements);
     case 'RECEIVE_ACHIEVEMENT':
@@ -43547,6 +43478,9 @@ var RoutineReducer = exports.RoutineReducer = function RoutineReducer() {
   // console.log("routine reducer");
   Object.freeze(state);
   switch (action.type) {
+    case 'RECEIVE_CURRENT_USER':
+      return (0, _lodash.merge)({}, defaultRoutines);
+
     case 'RECEIVE_STREAKS':
       return (0, _lodash.merge)({}, action.routines);
     case 'RECEIVE_ACHIEVEMENT':
@@ -43584,6 +43518,8 @@ var StreakReducer = exports.StreakReducer = function StreakReducer() {
   // console.log("streak reducer");
   Object.freeze(state);
   switch (action.type) {
+    case 'RECEIVE_CURRENT_USER':
+      return (0, _lodash.merge)({}, defaultStreaks);
 
     case 'RECEIVE_STREAKS':
       return (0, _lodash.merge)({}, action.streaks);

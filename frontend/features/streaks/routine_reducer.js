@@ -10,6 +10,9 @@ export const RoutineReducer = (state = defaultRoutines, action) => {
   // console.log("routine reducer");
   Object.freeze(state);
   switch(action.type) {
+    case 'RECEIVE_CURRENT_USER':
+      return merge({}, defaultRoutines);
+
     case 'RECEIVE_STREAKS':
       return merge({}, action.routines);
     case 'RECEIVE_ACHIEVEMENT':

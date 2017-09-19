@@ -12,12 +12,6 @@ class Api::AchievementsController < ApplicationController
     end
   end
 
-  def destroy
-  end
-
-  def update
-  end
-
   def index
     @achievements = current_user.achievements
     @routines = current_user.routines

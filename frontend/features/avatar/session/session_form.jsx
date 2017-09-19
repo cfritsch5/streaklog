@@ -117,7 +117,7 @@ class SessionForm extends React.Component {
             </div>
             {signup}
           </div>
-          <div className="bottom">
+          <div className="">
             <button className=""
               onClick={this.handleLogin}
               value='login'>Login</button>

@@ -91,7 +91,7 @@ class AddEdit extends React.Component{
     } else {
       return(
         <div className='content'>
-          <button onClick={()=>this.setState({add: true})}>addAchievement</button>
+          <button onClick={()=>this.setState({add: true})}>Did the Thing!</button>
           <div className='routines'>
             {this.routines()}
           </div>

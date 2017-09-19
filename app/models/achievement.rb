@@ -46,6 +46,9 @@ class Achievement < ApplicationRecord
 
       self.streak_id = streak.id
       self.save
+    end
+
+    if(self.streak_id)
       self.streak.continued?(self.id)
     end
   end

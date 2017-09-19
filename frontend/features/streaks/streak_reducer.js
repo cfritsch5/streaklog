@@ -10,6 +10,8 @@ export const StreakReducer = (state = defaultStreaks, action) => {
   // console.log("streak reducer");
   Object.freeze(state);
   switch(action.type) {
+    case 'RECEIVE_CURRENT_USER':
+      return merge({}, defaultStreaks);
 
     case 'RECEIVE_STREAKS':
       return merge({}, action.streaks);
