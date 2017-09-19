@@ -21,31 +21,29 @@ body, html, div, h1, h2, h3, h4, h5, h6 {
 
 body {
   font-family: 'Lato', sans-serif;
+  background-image: url("starrynigh.jpg");
+}
+
+.bottom {
+  flex-direction: column;
+}
+
+.top {
+  flex-direction: column-reverse;
 }
 
 .login-form, .top, .bottom, .today, .streaks, .addedit, .avatar {
   display: flex;
-  /*border: 1px solid grey;*/
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
-.top, .bottom {
-  flex-direction: row;
-}
+
 .login-form, .today, .addedit, .streaks {
   flex-direction: column;
 }
 
-.avatar {
-  width: 30%;
-}
-
 .streaks {
-  width: 70%;
-}
-
-.avater, .streaks {
-  height: 50vh;
+  width: 100%;
 }
 
 .today, .addedit {
@@ -54,6 +52,29 @@ body {
   justify-content: flex-start;
 }
 
+@media (min-device-width: 500px){
+
+  .top, .bottom {
+    flex-direction: row;
+    height: 50vh;
+  }
+
+  .avatar {
+    width: 30%;
+  }
+
+  .streaks {
+    width: 70%;
+  }
+
+  .login-form, .top, .bottom, .today, .streaks, .addedit, .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}/*End media query*/
+
+/*
 .sparky {
   width: 80%;
   border-radius: 25px;
@@ -65,4 +86,4 @@ body {
   width: 100%;
   height: 100%;
   opacity: 0.8;
-}
+}*/

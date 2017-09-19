@@ -1,33 +1,46 @@
+$rounded-corner: 15px;
+$small-avatar: 75px;
+$large-avatar: 150px;
+
 .avatar-content {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("spark.jpg");
+  width: $small-avatar;
+  height: $small-avatar;
+  background-size: cover;
+  border-radius: $rounded-corner;
 }
 
-.avatar-overlay {
-  position: absolute;
-  z-index: 1;
-  width: 24%;
-  height: 45%;
-  display: flex;
-  justify-content: flex-end;
-  align-self: flex-start;
+@media (min-device-width: 500px){
+  .avatar-content {
+    width: $large-avatar;
+    height: $large-avatar;
+  }
 }
+
+
+.avatar-overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 
 .login-button {
     border: none;
     background: white;
     opacity: 0.8;
     border-bottom-left-radius: 40px;
-    border-top-right-radius: 25px;
+    border-top-right-radius: $rounded-corner;
     height: 50px;
     width: 50px;
   }
 
   .dropdown {
-      display: table;
-      display: flex;
-      width: 100%;
-      height: 100%;
-      justify-content: flex-end;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }

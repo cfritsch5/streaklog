@@ -41,7 +41,7 @@ class Achievement < ApplicationRecord
   end
 
   def ensure_streak
-    unless self.streak_id
+    if repeats && !self.streak_id
       streak = Streak.create!(
       name: self.name,
       user_id: self.user_id,
@@ -53,4 +53,17 @@ class Achievement < ApplicationRecord
       self.save
     end
   end
+  # def ensure_streak
+  #   unless self.streak_id
+  #     streak = Streak.create!(
+  #     name: self.name,
+  #     user_id: self.user_id,
+  #     last_achievement_id: self.id,
+  #     repeats: self.repeats || ['?????']
+  #     )
+  #
+  #     self.streak_id = streak.id
+  #     self.save
+  #   end
+  # end
 end

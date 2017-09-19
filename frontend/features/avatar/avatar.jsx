@@ -59,9 +59,7 @@ class Avatar extends React.Component{
 
       dropdown = (
         <div className="dropdown">
-          <h3>{username}</h3>
           <button className="login-button" onClick={this.login}>{login}</button>
-
         </div>
       );
     }
@@ -70,7 +68,6 @@ class Avatar extends React.Component{
     return(
       <div className='avatar' >
           <div className="avatar-content">
-            <img className="sparky" src="assets/spark.jpg"/>
             <div className="avatar-overlay">
               {dropdown}
             </div>

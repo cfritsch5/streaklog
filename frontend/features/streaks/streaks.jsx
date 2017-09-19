@@ -44,19 +44,26 @@ class Streaks extends React.Component{
       let achv = this.props.achievements[streak.achievement] || "blank";
       let rtn = this.props.routines[streak.routine];
       i++;
+      // <div className='streak'
+      //   style={{
+      //     width: `${streak.currentStreak*10}%`,
+      //     background: colors[i],
+      //     height: `${length}px`
+      //   }}>
         return (
           <div key={id} className="streak-container">
             <div className='streak'
               style={{
                 width: `${streak.currentStreak*10}%`,
                 background: colors[i],
-                height: `${length}px`
               }}>
               <h4 className="streak-title">{streak.name}</h4>
           </div>
           <div className="streak-num">
-            <img className="onfire" src="assets/fire-icons-set.png"/>
-            <h2 className="current-streak-num">{streak.currentStreak}</h2>
+            <div className="onfire">
+              <img className="onfire" src="assets/fire-icons-set.png"/>
+              <h2 className="current-streak-num">{streak.currentStreak}</h2>
+            </div>
           </div>
         </div>);
     });
@@ -69,7 +76,7 @@ class Streaks extends React.Component{
     let streaks = this.streaks();
     return(
       <div className='streaks'>
-          {streaks}
+        {streaks}          
       </div>
     );
   }

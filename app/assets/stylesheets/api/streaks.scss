@@ -4,35 +4,45 @@
 
 
 .streak {
-  width: 95%;
+  min-width: 5%;
   border-radius: 10em;
   background: white;
-  margin: 1%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   text-align: center;
+  height: 30px;
+  margin-right: 5px;
 }
 
 .streak-container {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
+    margin: 5px;
 }
 
 img.onfire {
     position: absolute;
     z-index: -1;
-    height: 8%;
-    padding-bottom: 2%;
-}
-.streak-num {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.streak-title {
-  padding-right: 20px;
+.onfire {
+    height: 45px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
+
+.streak-num {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  h4.streak-title {
+      padding-right: 10px;
+      position: absolute;
+  }
