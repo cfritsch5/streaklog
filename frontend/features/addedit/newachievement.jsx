@@ -17,7 +17,7 @@ class NewAchievement extends React.Component {
   }
 
   flipstate(stateSlice) {
-    this.setState({[stateSlice]: !this.state[stateSlice]});
+    // this.setState({[stateSlice]: !this.state[stateSlice]});
   }
   //
   // newAchievement(){
@@ -54,7 +54,7 @@ class NewAchievement extends React.Component {
     // e.preventDefault();
     console.log("addAchievement", e.currentTarget.name.value);
     this.props.postNewAchievement(e.currentTarget.name.value);
-    this.flipstate('addAch');
+    // this.flipstate('addAch');
   }
 
   newRoutine(){
@@ -82,8 +82,6 @@ class NewAchievement extends React.Component {
   }
 
   render(){
-    let newRoutine = this.newRoutine();
-    if(this.state.addAch){
       return (
         <div className='add-new'>
           <form onSubmit={this.addAchievement}>
@@ -92,9 +90,10 @@ class NewAchievement extends React.Component {
               placeholder='Achievement Name'
               className=""
               />
+            <input type="text" name="hours" placeholder="hours" className="hours"/>
               <label>
-                <input name="repeats" type="radio" value="none" checked="checked"/>
-                whenever
+                <input name="repeats" type="radio" value="none" defaultChecked="defaultChecked"/>
+                non-routine
               </label>
               <label>
                 <input name="repeats" type="radio" value="daily"/>
@@ -108,9 +107,6 @@ class NewAchievement extends React.Component {
             </form>
           </div>
         );
-    }else{
-      return(<button onClick={()=>(this.flipstate('addAch'))}>Did the Thing!</button>);
-    }
   }
 }
 

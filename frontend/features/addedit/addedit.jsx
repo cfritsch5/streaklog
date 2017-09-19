@@ -8,6 +8,11 @@ class AddEdit extends React.Component{
     this.routines  = this.routines.bind(this);
     this.checkRtnAchv = this.checkRtnAchv.bind(this);
     this.setRoutinesState = this.setRoutinesState.bind(this);
+    this.addAchievement = this.addAchievement.bind(this);
+
+    this.state ={
+      add: false
+    };
   }
 
   componentWillMount(){
@@ -74,18 +79,34 @@ class AddEdit extends React.Component{
     this.props.postAchievement(streakId);
   }
 
-  render(){
-    let routines = this.routines();
-    return(
-      <div className='addedit'>
+  addAchievement(){
+    if(this.state.add){
+      return(
         <div className='content'>
-          <div className='add'>
+          <div className='add' >
             <NewAchievementContainer/>
           </div>
+        </div>
+      );
+    } else {
+      return(
+        <div className='content'>
+          <button onClick={()=>this.setState({add: true})}>addAchievement</button>
           <div className='routines'>
-            {routines}
+            {this.routines()}
           </div>
         </div>
+        );
+    }
+
+  }
+
+  render(){
+    let routines = this.routines();
+    let addAchievement = this.addAchievement();
+    return(
+      <div className='addedit'>
+        {addAchievement}
       </div>
     );
   }

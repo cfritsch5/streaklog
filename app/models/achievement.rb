@@ -36,11 +36,6 @@ class Achievement < ApplicationRecord
 
   def connect_streak
     # puts "CONNNECTING errIIIIIEHHHH .... MMM BEEEP beep EIIIIIHHH"
-    ensure_streak
-    self.streak.continued?(self.id)
-  end
-
-  def ensure_streak
     if repeats && !self.streak_id
       streak = Streak.create!(
       name: self.name,
@@ -51,8 +46,23 @@ class Achievement < ApplicationRecord
 
       self.streak_id = streak.id
       self.save
+      self.streak.continued?(self.id)
     end
   end
+
+  # def ensure_streak
+  #   if repeats && !self.streak_id
+  #     streak = Streak.create!(
+  #     name: self.name,
+  #     user_id: self.user_id,
+  #     last_achievement_id: self.id,
+  #     repeats: self.repeats || ['?????']
+  #     )
+  #
+  #     self.streak_id = streak.id
+  #     self.save
+  #   end
+  # end
   # def ensure_streak
   #   unless self.streak_id
   #     streak = Streak.create!(

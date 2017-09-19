@@ -42298,6 +42298,11 @@ var AddEdit = function (_React$Component) {
     _this.routines = _this.routines.bind(_this);
     _this.checkRtnAchv = _this.checkRtnAchv.bind(_this);
     _this.setRoutinesState = _this.setRoutinesState.bind(_this);
+    _this.addAchievement = _this.addAchievement.bind(_this);
+
+    _this.state = {
+      add: false
+    };
     return _this;
   }
 
@@ -42369,26 +42374,48 @@ var AddEdit = function (_React$Component) {
       this.props.postAchievement(streakId);
     }
   }, {
-    key: 'render',
-    value: function render() {
-      var routines = this.routines();
-      return _react2.default.createElement(
-        'div',
-        { className: 'addedit' },
-        _react2.default.createElement(
+    key: 'addAchievement',
+    value: function addAchievement() {
+      var _this3 = this;
+
+      if (this.state.add) {
+        return _react2.default.createElement(
           'div',
           { className: 'content' },
           _react2.default.createElement(
             'div',
             { className: 'add' },
             _react2.default.createElement(_newachievement_container2.default, null)
+          )
+        );
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'content' },
+          _react2.default.createElement(
+            'button',
+            { onClick: function onClick() {
+                return _this3.setState({ add: true });
+              } },
+            'addAchievement'
           ),
           _react2.default.createElement(
             'div',
             { className: 'routines' },
-            routines
+            this.routines()
           )
-        )
+        );
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var routines = this.routines();
+      var addAchievement = this.addAchievement();
+      return _react2.default.createElement(
+        'div',
+        { className: 'addedit' },
+        addAchievement
       );
     }
   }]);
@@ -42458,8 +42485,6 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -42490,9 +42515,9 @@ var NewAchievement = function (_React$Component) {
 
   _createClass(NewAchievement, [{
     key: 'flipstate',
-    value: function flipstate(stateSlice) {
-      this.setState(_defineProperty({}, stateSlice, !this.state[stateSlice]));
-    }
+    value: function flipstate(stateSlice) {}
+    // this.setState({[stateSlice]: !this.state[stateSlice]});
+
     //
     // newAchievement(){
     //   if(this.state.addAch){
@@ -42530,7 +42555,7 @@ var NewAchievement = function (_React$Component) {
       // e.preventDefault();
       console.log("addAchievement", e.currentTarget.name.value);
       this.props.postNewAchievement(e.currentTarget.name.value);
-      this.flipstate('addAch');
+      // this.flipstate('addAch');
     }
   }, {
     key: 'newRoutine',
@@ -42561,55 +42586,43 @@ var NewAchievement = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      var newRoutine = this.newRoutine();
-      if (this.state.addAch) {
-        return _react2.default.createElement(
-          'div',
-          { className: 'add-new' },
+      return _react2.default.createElement(
+        'div',
+        { className: 'add-new' },
+        _react2.default.createElement(
+          'form',
+          { onSubmit: this.addAchievement },
+          _react2.default.createElement('input', { type: 'text',
+            name: 'name',
+            placeholder: 'Achievement Name',
+            className: ''
+          }),
+          _react2.default.createElement('input', { type: 'text', name: 'hours', placeholder: 'hours', className: 'hours' }),
           _react2.default.createElement(
-            'form',
-            { onSubmit: this.addAchievement },
-            _react2.default.createElement('input', { type: 'text',
-              name: 'name',
-              placeholder: 'Achievement Name',
-              className: ''
-            }),
-            _react2.default.createElement(
-              'label',
-              null,
-              _react2.default.createElement('input', { name: 'repeats', type: 'radio', value: 'none', checked: 'checked' }),
-              'whenever'
-            ),
-            _react2.default.createElement(
-              'label',
-              null,
-              _react2.default.createElement('input', { name: 'repeats', type: 'radio', value: 'daily' }),
-              'daily'
-            ),
-            _react2.default.createElement(
-              'label',
-              null,
-              _react2.default.createElement('input', { name: 'repeats', type: 'radio', value: 'weekly' }),
-              'weekly'
-            ),
-            _react2.default.createElement(
-              'button',
-              { type: 'submit' },
-              'Yeah!'
-            )
+            'label',
+            null,
+            _react2.default.createElement('input', { name: 'repeats', type: 'radio', value: 'none', defaultChecked: 'defaultChecked' }),
+            'non-routine'
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement('input', { name: 'repeats', type: 'radio', value: 'daily' }),
+            'daily'
+          ),
+          _react2.default.createElement(
+            'label',
+            null,
+            _react2.default.createElement('input', { name: 'repeats', type: 'radio', value: 'weekly' }),
+            'weekly'
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            'Yeah!'
           )
-        );
-      } else {
-        return _react2.default.createElement(
-          'button',
-          { onClick: function onClick() {
-              return _this2.flipstate('addAch');
-            } },
-          'Did the Thing!'
-        );
-      }
+        )
+      );
     }
   }]);
 
