@@ -36,6 +36,6 @@ export const apiPostNewAchievement = (name) => {
   return $.ajax({
     method: 'POST',
     url: '/api/achievements',
-    data: {achievement: {name}}
+    data: {achievement: name}
   });
 };

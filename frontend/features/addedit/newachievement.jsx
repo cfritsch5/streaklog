@@ -4,16 +4,27 @@ class NewAchievement extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {
-    };
     this.addAchievement = this.addAchievement.bind(this);
   }
 
 
   addAchievement(e){
     e.preventDefault();
-    console.log("addAchievement", e.currentTarget.name.value);
-    this.props.postNewAchievement(e.currentTarget.name.value);
+    let achievement;
+    let repeats = e.currentTarget.repeats.value;
+    if (repeats === "none"){
+      achievement = {
+        name: e.currentTarget.name.value,
+      };
+    } else {
+      achievement = {
+        name: e.currentTarget.name.value,
+        repeats: repeats
+      };
+    }
+
+    console.log("addAchievement", achievement);
+    this.props.postNewAchievement(achievement);
   }
 
 

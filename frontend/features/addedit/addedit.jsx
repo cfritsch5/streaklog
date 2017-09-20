@@ -11,7 +11,7 @@ class AddEdit extends React.Component{
     this.addAchievement = this.addAchievement.bind(this);
 
     this.state ={
-      add: false
+      add: false,
     };
   }
 
@@ -82,7 +82,7 @@ class AddEdit extends React.Component{
   addAchievement(){
     if(this.state.add){
       return(
-        <div className='content'>
+        <div className='content' onMouseLeave={()=>this.setState({add: false})}>
           <div className='add' >
             <NewAchievementContainer/>
           </div>

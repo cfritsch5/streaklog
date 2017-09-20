@@ -28486,7 +28486,7 @@ var apiPostNewAchievement = exports.apiPostNewAchievement = function apiPostNewA
   return $.ajax({
     method: 'POST',
     url: '/api/achievements',
-    data: { achievement: { name: name } }
+    data: { achievement: name }
   });
 };
 
@@ -42381,7 +42381,9 @@ var AddEdit = function (_React$Component) {
       if (this.state.add) {
         return _react2.default.createElement(
           'div',
-          { className: 'content' },
+          { className: 'content', onMouseLeave: function onMouseLeave() {
+              return _this3.setState({ add: false });
+            } },
           _react2.default.createElement(
             'div',
             { className: 'add' },
@@ -42499,55 +42501,67 @@ var NewAchievement = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (NewAchievement.__proto__ || Object.getPrototypeOf(NewAchievement)).call(this, props));
 
-    _this.state = {};
     _this.addAchievement = _this.addAchievement.bind(_this);
     return _this;
   }
 
   _createClass(NewAchievement, [{
-    key: 'addAchievement',
+    key: "addAchievement",
     value: function addAchievement(e) {
       e.preventDefault();
-      console.log("addAchievement", e.currentTarget.name.value);
-      this.props.postNewAchievement(e.currentTarget.name.value);
+      var achievement = void 0;
+      var repeats = e.currentTarget.repeats.value;
+      if (repeats === "none") {
+        achievement = {
+          name: e.currentTarget.name.value
+        };
+      } else {
+        achievement = {
+          name: e.currentTarget.name.value,
+          repeats: repeats
+        };
+      }
+
+      console.log("addAchievement", achievement);
+      this.props.postNewAchievement(achievement);
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        { className: 'add-new' },
+        "div",
+        { className: "add-new" },
         _react2.default.createElement(
-          'form',
+          "form",
           { onSubmit: this.addAchievement },
-          _react2.default.createElement('input', { type: 'text',
-            name: 'name',
-            placeholder: 'Achievement Name',
-            className: ''
+          _react2.default.createElement("input", { type: "text",
+            name: "name",
+            placeholder: "Achievement Name",
+            className: ""
           }),
-          _react2.default.createElement('input', { type: 'text', name: 'hours', placeholder: 'hours', className: 'hours' }),
+          _react2.default.createElement("input", { type: "text", name: "hours", placeholder: "hours", className: "hours" }),
           _react2.default.createElement(
-            'label',
+            "label",
             null,
-            _react2.default.createElement('input', { name: 'repeats', type: 'radio', value: 'none', defaultChecked: 'defaultChecked' }),
-            'non-routine'
+            _react2.default.createElement("input", { name: "repeats", type: "radio", value: "none", defaultChecked: "defaultChecked" }),
+            "non-routine"
           ),
           _react2.default.createElement(
-            'label',
+            "label",
             null,
-            _react2.default.createElement('input', { name: 'repeats', type: 'radio', value: 'daily' }),
-            'daily'
+            _react2.default.createElement("input", { name: "repeats", type: "radio", value: "daily" }),
+            "daily"
           ),
           _react2.default.createElement(
-            'label',
+            "label",
             null,
-            _react2.default.createElement('input', { name: 'repeats', type: 'radio', value: 'weekly' }),
-            'weekly'
+            _react2.default.createElement("input", { name: "repeats", type: "radio", value: "weekly" }),
+            "weekly"
           ),
           _react2.default.createElement(
-            'button',
-            { type: 'submit' },
-            'Yeah!'
+            "button",
+            { type: "submit" },
+            "Yeah!"
           )
         )
       );
@@ -43466,9 +43480,9 @@ exports.RoutineReducer = undefined;
 var _lodash = __webpack_require__(35);
 
 var defaultRoutines = {
-  1: { name: "Yoga" },
-  2: { name: "Take Vitamins" },
-  3: { name: "Feed Dragon Charcoal" }
+  1: { name: "Yoga", streak_id: 1 },
+  2: { name: "Take Vitamins", streak_id: 0 },
+  3: { name: "Feed Dragon Charcoal", streak_id: 1 }
 };
 
 var RoutineReducer = exports.RoutineReducer = function RoutineReducer() {

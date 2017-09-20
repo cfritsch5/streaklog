@@ -1,9 +1,9 @@
 import {merge} from 'lodash';
 
 const defaultRoutines = {
-  1: {name:"Yoga"},
-  2: {name:"Take Vitamins"},
-  3: {name:"Feed Dragon Charcoal"}
+  1: {name:"Yoga", streak_id: 1},
+  2: {name:"Take Vitamins", streak_id:0},
+  3: {name:"Feed Dragon Charcoal",streak_id:1}
 };
 
 export const RoutineReducer = (state = defaultRoutines, action) => {

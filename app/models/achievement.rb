@@ -7,7 +7,6 @@ class Achievement < ApplicationRecord
   before_validation :series?
 
   def series?
-    # debugger
     if self.streak_id
       add_to_series
     else
@@ -23,11 +22,11 @@ class Achievement < ApplicationRecord
   end
 
   def find_series
-    streak = Streak.find_by(name: self.name)
+    streak = Streak.find_by(name: self.name, user_id: user_id)
     if streak
       self.streak_id = streak.id
     else
-      achv = Achievement.find_by(name: self.name)#.where.not(streak_id: nil).last
+      achv = Achievement.find_by(name: self.name, user_id: user_id)
       if achv
         self.streak_id = achv.streak_id
       end
@@ -35,13 +34,12 @@ class Achievement < ApplicationRecord
   end
 
   def connect_streak
-    # puts "CONNNECTING errIIIIIEHHHH .... MMM BEEEP beep EIIIIIHHH"
     if repeats && !self.streak_id
       streak = Streak.create!(
       name: self.name,
       user_id: self.user_id,
       last_achievement_id: self.id,
-      repeats: self.repeats || ['?????']
+      repeats: [self.repeats] || ['?????']
       )
 
       self.streak_id = streak.id
@@ -53,30 +51,4 @@ class Achievement < ApplicationRecord
     end
   end
 
-  # def ensure_streak
-  #   if repeats && !self.streak_id
-  #     streak = Streak.create!(
-  #     name: self.name,
-  #     user_id: self.user_id,
-  #     last_achievement_id: self.id,
-  #     repeats: self.repeats || ['?????']
-  #     )
-  #
-  #     self.streak_id = streak.id
-  #     self.save
-  #   end
-  # end
-  # def ensure_streak
-  #   unless self.streak_id
-  #     streak = Streak.create!(
-  #     name: self.name,
-  #     user_id: self.user_id,
-  #     last_achievement_id: self.id,
-  #     repeats: self.repeats || ['?????']
-  #     )
-  #
-  #     self.streak_id = streak.id
-  #     self.save
-  #   end
-  # end
 end

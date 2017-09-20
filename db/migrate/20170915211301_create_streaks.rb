@@ -9,7 +9,6 @@ class CreateStreaks < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-
-    add_index :streaks, :name, unique: true
+    add_index :streaks, [:name, :user_id], unique: true
   end
 end
