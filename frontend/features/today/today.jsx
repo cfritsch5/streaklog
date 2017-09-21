@@ -22,14 +22,14 @@ class Today extends React.Component{
     const length = Object.keys(this.props.achievements).length;
     // console.log(length,"length");
     switch (true) {
-      case (length >= 8):
+      case (length >= 5):
         return "Stellar!";
-      case (length >= 6):
-        return "Your Rocking It!";
       case (length >= 4):
-        return "Look At You Go";
+        return "You Are Rocking It!";
+      case (length >= 3):
+        return "Look At You Go!";
       case (length >= 2):
-        return "On Roll!";
+        return "On A Roll!";
       case (length >= 1):
         return "Nice Job Keep 'Em Coming!";
       default:

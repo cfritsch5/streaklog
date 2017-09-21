@@ -42176,14 +42176,14 @@ var Today = function (_React$Component) {
       var length = Object.keys(this.props.achievements).length;
       // console.log(length,"length");
       switch (true) {
-        case length >= 8:
+        case length >= 5:
           return "Stellar!";
-        case length >= 6:
-          return "Your Rocking It!";
         case length >= 4:
-          return "Look At You Go";
+          return "You Are Rocking It!";
+        case length >= 3:
+          return "Look At You Go!";
         case length >= 2:
-          return "On Roll!";
+          return "On A Roll!";
         case length >= 1:
           return "Nice Job Keep 'Em Coming!";
         default:
@@ -42341,25 +42341,24 @@ var AddEdit = function (_React$Component) {
       var _this2 = this;
 
       var routines = [];
-      var checked = 'off';
       Object.keys(this.props.routines).forEach(function (id) {
-        checked = _this2.state.routinesState[id] ? 'checked' : '';
-        routines.push(_react2.default.createElement(
-          'div',
-          { key: id },
-          _react2.default.createElement(
-            'label',
-            null,
-            _react2.default.createElement('input', { name: id,
-              id: 'checkBox' + id,
-              type: 'checkbox',
-              checked: checked,
-              disabled: _this2.state.routinesState[id],
-              onChange: _this2.checkRtnAchv
-            }),
-            _this2.props.routines[id].name
-          )
-        ));
+        if (!_this2.state.routinesState[id]) {
+          routines.push(_react2.default.createElement(
+            'div',
+            { key: id },
+            _react2.default.createElement(
+              'label',
+              null,
+              _react2.default.createElement('input', { name: id,
+                id: 'checkBox' + id,
+                type: 'checkbox',
+                disabled: _this2.state.routinesState[id],
+                onChange: _this2.checkRtnAchv
+              }),
+              _this2.props.routines[id].name
+            )
+          ));
+        }
       });
       return routines;
     }

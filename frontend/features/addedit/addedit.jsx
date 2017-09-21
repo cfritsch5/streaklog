@@ -48,24 +48,23 @@ class AddEdit extends React.Component{
 
   routines(){
     let routines = [];
-    let checked = 'off';
     Object.keys(this.props.routines).forEach((id)=>{
-      checked = this.state.routinesState[id] ? 'checked' : '';
-      routines.push(
-        <div key={id}>
-          <label >
-            <input name={id}
-              id={`checkBox${id}`}
-              type="checkbox"
-              checked={checked}
-              disabled={this.state.routinesState[id]}
-              onChange={this.checkRtnAchv}
-              />
+      if(!this.state.routinesState[id]){
+        routines.push(
+          <div key={id}>
+            <label >
+              <input name={id}
+                id={`checkBox${id}`}
+                type="checkbox"
+                disabled={this.state.routinesState[id]}
+                onChange={this.checkRtnAchv}
+                />
 
-            {this.props.routines[id].name}
-          </label>
-        </div>
-      );
+              {this.props.routines[id].name}
+            </label>
+          </div>
+        );
+      }
     });
     return routines;
   }

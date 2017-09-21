@@ -43,7 +43,7 @@ class Streak < ApplicationRecord
       self.last_achievement_id = new_achievement_id
       self.save
     else
-      self.current_streak = 0
+      self.current_streak = 1
       self.save
     end
   end
