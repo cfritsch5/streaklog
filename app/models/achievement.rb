@@ -34,6 +34,8 @@ class Achievement < ApplicationRecord
   end
 
   def connect_streak
+    # debugger
+    puts "connect_streak!!!!!!!!!!!!!!!"
     if repeats && !self.streak_id
       streak = Streak.create!(
       name: self.name,

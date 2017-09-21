@@ -10,7 +10,8 @@ class Routine < ApplicationRecord
     last_date = Achievement.find(last_achv_id).created_at.to_date
     # puts "DATES", next_date, last_date
     self.repeats.all? do |rule|
-      # puts "rule", rule
+      puts "rule", rule
+      # debugger
       repeat_rules( rule, next_date, last_date)
     end
   end
