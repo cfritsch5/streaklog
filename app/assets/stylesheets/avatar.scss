@@ -1,6 +1,7 @@
 $rounded-corner: 15px;
 $small-avatar: 75px;
 $large-avatar: 200px;
+$transparent-white: rgba(255, 255, 255, 0.5);
 
 .avatar-content {
   display: flex;
@@ -14,7 +15,7 @@ $large-avatar: 200px;
 }
 
 @media (min-device-width: 500px){
-  .avatar-content {
+  .avatar-content, .login-form {
     width: $large-avatar;
     height: $large-avatar;
   }
@@ -22,25 +23,59 @@ $large-avatar: 200px;
 
 
 .avatar-overlay {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 
 .login-button {
-    border: none;
-    background: white;
-    opacity: 0.8;
-    border-bottom-left-radius: 40px;
-    border-top-right-radius: $rounded-corner;
-    height: 50px;
-    width: 50px;
+  border: none;
+  background: white;
+  opacity: 0.8;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: $rounded-corner;
+  height: 50px;
+  width: 50px;
   }
 
-  .dropdown {
+.login-text {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.session-button {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.login-item {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+}
+
+form.login-form {
+  background: $transparent-white;
+  border-radius: $rounded-corner;
+}
+
+input.login-input {
+    font-size: 15px;
+    width: 70%;
+    margin: 5px;
+    border-radius: 5px;
 }

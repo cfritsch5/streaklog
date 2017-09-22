@@ -1,11 +1,30 @@
 $rounded-corner: 15px;
+$transparent-white: rgba(255, 255, 255, 0.5);
 
 .content {
     margin: 20px;
     margin-top: 15%;
     height: 80%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: $transparent-white;
     width: 66%;
-    border-radius: 25px;
+    border-radius: $rounded-corner;
     padding: 15px;
+}
+
+.starbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10em;
+  background: $transparent-white;
+  padding: 0;
+}
+
+// .starbutton:active {
+//   transform: translateY(5px);
+//   transform: translateX(5px);
+// }
+
+.star {
+  height: 50px;
 }

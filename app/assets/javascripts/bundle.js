@@ -42373,6 +42373,11 @@ var AddEdit = function (_React$Component) {
       this.props.postAchievement(streakId);
     }
   }, {
+    key: 'star',
+    value: function star(e) {
+      // console.log(e);
+    }
+  }, {
     key: 'addAchievement',
     value: function addAchievement() {
       var _this3 = this;
@@ -42380,30 +42385,60 @@ var AddEdit = function (_React$Component) {
       if (this.state.add) {
         return _react2.default.createElement(
           'div',
-          { className: 'content', onMouseLeave: function onMouseLeave() {
-              return _this3.setState({ add: false });
-            } },
+          { className: 'content' },
           _react2.default.createElement(
             'div',
             { className: 'add' },
-            _react2.default.createElement(_newachievement_container2.default, null)
+            _react2.default.createElement(_newachievement_container2.default, null),
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this3.setState({ add: false });
+                } },
+              'Close'
+            )
           )
         );
       } else {
         return _react2.default.createElement(
           'div',
-          { className: 'content' },
+          null,
           _react2.default.createElement(
-            'button',
-            { onClick: function onClick() {
-                return _this3.setState({ add: true });
-              } },
-            'Did the Thing!'
+            'div',
+            { className: 'content' },
+            _react2.default.createElement(
+              'button',
+              { className: 'starbutton', onClick: function onClick() {
+                  return _this3.setState({ add: true });
+                } },
+              _react2.default.createElement('img', { className: 'star', onMouseMove: this.star, src: 'assets/starrbutton.png' }),
+              _react2.default.createElement(
+                'h1',
+                null,
+                'Did A Thing!'
+              )
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'starbutton', onClick: function onClick() {
+                  return _this3.setState({ add: true });
+                } },
+              _react2.default.createElement('img', { className: 'star', onMouseMove: this.star, src: 'assets/routine.png' }),
+              _react2.default.createElement(
+                'h1',
+                null,
+                'Do A Thing!'
+              )
+            )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'routines' },
-            this.routines()
+            { className: 'content' },
+            _react2.default.createElement(
+              'div',
+              { className: 'routines' },
+              this.routines()
+            )
           )
         );
       }
@@ -42500,6 +42535,10 @@ var NewAchievement = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (NewAchievement.__proto__ || Object.getPrototypeOf(NewAchievement)).call(this, props));
 
+    _this.state = {
+      achievement: ""
+
+    };
     _this.addAchievement = _this.addAchievement.bind(_this);
     return _this;
   }
@@ -42538,11 +42577,13 @@ var NewAchievement = function (_React$Component) {
             placeholder: "Achievement Name",
             className: ""
           }),
-          _react2.default.createElement("input", { type: "text", name: "hours", placeholder: "hours", className: "hours" }),
           _react2.default.createElement(
             "label",
             null,
-            _react2.default.createElement("input", { name: "repeats", type: "radio", value: "none", defaultChecked: "defaultChecked" }),
+            _react2.default.createElement("input", { name: "repeats",
+              type: "radio",
+              value: "none",
+              defaultChecked: "defaultChecked" }),
             "non-routine"
           ),
           _react2.default.createElement(
@@ -42944,7 +42985,11 @@ var Avatar = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { className: 'login-button', onClick: this.login },
-            login
+            _react2.default.createElement(
+              'div',
+              { className: 'login-text' },
+              login
+            )
           )
         );
       }
@@ -43231,14 +43276,14 @@ var SessionForm = function (_React$Component) {
             { className: '' },
             _react2.default.createElement(
               'button',
-              { className: '',
+              { className: 'session-button',
                 onClick: this.handleLogin,
                 value: 'login' },
               'Login'
             ),
             _react2.default.createElement(
               'button',
-              { className: '',
+              { className: 'session-button',
                 onClick: this.handleSignup,
                 value: 'signup' },
               'signup'

@@ -12,7 +12,7 @@
   align-items: center;
   text-align: center;
   height: 30px;
-  margin-right: 5px;
+  margin-right: -25px;
 }
 
 .streak-container {
@@ -20,7 +20,7 @@
     justify-content: flex-end;
     align-items: flex-end;
     width: 100%;
-    margin: 5px;
+    // margin: 5px;
 }
 
 img.onfire {
@@ -29,11 +29,12 @@ img.onfire {
 }
 
 .onfire {
-    height: 45px;
+    height: 40px;
     width: 30px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    z-index: 1;
 }
 
 .streak-num {
@@ -42,7 +43,7 @@ img.onfire {
     align-items: flex-end;
   }
 
-  h4.streak-title {
-      padding-right: 10px;
+.streak-title {
+      padding-right: 30px;
       position: absolute;
   }
