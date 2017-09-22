@@ -10,7 +10,8 @@ class Streak < ApplicationRecord
 
   belongs_to :last_achievement,
   foreign_key: :last_achievement_id,
-  class_name: :Achievement
+  class_name: :Achievement,
+  optional: true
 
   belongs_to :current_routine,
   foreign_key: :current_routine_id,
