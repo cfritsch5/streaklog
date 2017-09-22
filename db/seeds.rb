@@ -20,15 +20,18 @@ user_1 = User.create!(username: 'cfritsch', email: 'caseyfritsch@gmail.com', pas
 end
 
 5.downto(1) do |i|
-  Achievement.create!(name:"take vitamin supplment", user_id: user_1.id, created_at: Date.current - i, repeats: "daily")
+  Achievement.create!(name:"take vitamins", user_id: user_1.id, created_at: Date.current - i, repeats: "daily")
 end
 
 3.downto(1) do |i|
-  Achievement.create!(name:"brush teeth", user_id: user_1.id, created_at: Date.current - i, repeats: "daily")
+  Achievement.create!(name:"brush teeth morning", user_id: user_1.id, created_at: Date.current - i, repeats: "daily")
+end
+3.downto(1) do |i|
+  Achievement.create!(name:"brush teeth night", user_id: user_1.id, created_at: Date.current - i, repeats: "daily")
 end
 
-# 6.downto(3) do |i|
-#   Achievement.create!(name:"do yoga", user_id: user_1.id, created_at: Date.current - i, repeats: ["daily"])
-# end
+6.downto(3) do |i|
+  Achievement.create!(name:"do yoga", user_id: user_1.id, created_at: Date.current - 1, repeats: "daily")
+end
 #
-# Achievement.create!(name:"do yoga", user_id: user_1.id, created_at: Date.current - 1, repeats: ["daily"])
+Achievement.create!(name:"take Adderall", user_id: user_1.id, created_at: Date.current - 1, repeats: "whenever")
