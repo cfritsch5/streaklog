@@ -18,7 +18,7 @@ import AvatarContainer from './avatar/avatar_container';
 
 
 const App = () => (
-  <div>
+  <div className="app">
     <div className='top'>
       <StreaksContainer />
       <AvatarContainer />

@@ -118,10 +118,10 @@ class SessionForm extends React.Component {
             {signup}
           </div>
           <div className="">
-            <button className=""
+            <button className="session-button"
               onClick={this.handleLogin}
               value='login'>Login</button>
-            <button className=""
+            <button className="session-button"
               onClick={this.handleSignup}
               value='signup'>signup</button>
           </div>

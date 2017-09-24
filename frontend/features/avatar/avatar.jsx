@@ -59,7 +59,11 @@ class Avatar extends React.Component{
 
       dropdown = (
         <div className="dropdown">
-          <button className="login-button" onClick={this.login}>{login}</button>
+          <button className="login-button" onClick={this.login}>
+            <div className="login-text">
+            {login}
+            </div>
+          </button>
         </div>
       );
     }

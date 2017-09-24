@@ -1,14 +1,15 @@
 class Api::RoutinesController < ApplicationController
 
-  # def create
-  #   @routine = Routine.new(routine_params)
-  #
-  #   if @routine.save
-  #     render api/routines/show
-  #   else
-  #     render json: @routines.errors.full_messages, status: 422
-  #   end
-  # end
+  def create
+    params[:routine][:user_id] = current_user.id
+    @routine = Routine.new(routine_params)
+    @streak = Streak.new(user_id:user_id, name:name)
+    if @routine.save
+      render api/routines/show
+    else
+      render json: @routines.errors.full_messages, status: 422
+    end
+  end
   #
   # def destroy
   # end
@@ -22,14 +23,15 @@ class Api::RoutinesController < ApplicationController
   # def index
   #   @routines = current_user.routines
   # end
-  # 
-  # private
-  # def routine_params
-  #   params.require(:routine).permit(
-  #   :name,
-  #   :repeats,
-  #   :user_id,
-  #   :achievement_id
-  #   )
-  # end
+  #
+  private
+  def routine_params
+    params.require(:routine).permit(
+    :name,
+    :repeats,
+    :user_id,
+    :achievement_id,
+    :streak_id
+    )
+  end
 end

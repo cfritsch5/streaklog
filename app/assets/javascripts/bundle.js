@@ -40728,7 +40728,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var App = function App() {
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'app' },
     _react2.default.createElement(
       'div',
       { className: 'top' },
@@ -42373,11 +42373,6 @@ var AddEdit = function (_React$Component) {
       this.props.postAchievement(streakId);
     }
   }, {
-    key: 'star',
-    value: function star(e) {
-      // console.log(e);
-    }
-  }, {
     key: 'addAchievement',
     value: function addAchievement() {
       var _this3 = this;
@@ -42385,60 +42380,38 @@ var AddEdit = function (_React$Component) {
       if (this.state.add) {
         return _react2.default.createElement(
           'div',
-          { className: 'content' },
+          { className: 'content', onMouseLeave: function onMouseLeave() {
+              return _this3.setState({ add: false });
+            } },
           _react2.default.createElement(
             'div',
             { className: 'add' },
-            _react2.default.createElement(_newachievement_container2.default, null),
-            _react2.default.createElement(
-              'button',
-              { onClick: function onClick() {
-                  return _this3.setState({ add: false });
-                } },
-              'Close'
-            )
+            _react2.default.createElement(_newachievement_container2.default, null)
           )
         );
       } else {
         return _react2.default.createElement(
           'div',
-          null,
+          { className: 'content' },
           _react2.default.createElement(
-            'div',
-            { className: 'content' },
+            'button',
+            { className: 'starbutton',
+              onClick: function onClick() {
+                return _this3.setState({ add: true });
+              } },
+            _react2.default.createElement('img', { className: 'star',
+              onMouseMove: this.star,
+              src: 'assets/starrbutton.png' }),
             _react2.default.createElement(
-              'button',
-              { className: 'starbutton', onClick: function onClick() {
-                  return _this3.setState({ add: true });
-                } },
-              _react2.default.createElement('img', { className: 'star', onMouseMove: this.star, src: 'assets/starrbutton.png' }),
-              _react2.default.createElement(
-                'h1',
-                null,
-                'Did A Thing!'
-              )
-            ),
-            _react2.default.createElement(
-              'button',
-              { className: 'starbutton', onClick: function onClick() {
-                  return _this3.setState({ add: true });
-                } },
-              _react2.default.createElement('img', { className: 'star', onMouseMove: this.star, src: 'assets/routine.png' }),
-              _react2.default.createElement(
-                'h1',
-                null,
-                'Do A Thing!'
-              )
+              'h1',
+              null,
+              'Did A Thing!'
             )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'content' },
-            _react2.default.createElement(
-              'div',
-              { className: 'routines' },
-              this.routines()
-            )
+            { className: 'routines' },
+            this.routines()
           )
         );
       }
@@ -42535,10 +42508,6 @@ var NewAchievement = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (NewAchievement.__proto__ || Object.getPrototypeOf(NewAchievement)).call(this, props));
 
-    _this.state = {
-      achievement: ""
-
-    };
     _this.addAchievement = _this.addAchievement.bind(_this);
     return _this;
   }
@@ -42551,11 +42520,13 @@ var NewAchievement = function (_React$Component) {
       var repeats = e.currentTarget.repeats.value;
       if (repeats === "none") {
         achievement = {
-          name: e.currentTarget.name.value
+          name: e.currentTarget.name.value,
+          date: new Date()
         };
       } else {
         achievement = {
           name: e.currentTarget.name.value,
+          date: new Date(),
           repeats: repeats
         };
       }
@@ -42736,12 +42707,6 @@ var Streaks = function (_React$Component) {
         var achv = _this2.props.achievements[streak.achievement] || "blank";
         var rtn = _this2.props.routines[streak.routine];
         i++;
-        // <div className='streak'
-        //   style={{
-        //     width: `${streak.currentStreak*10}%`,
-        //     background: colors[i],
-        //     height: `${length}px`
-        //   }}>
         return _react2.default.createElement(
           "div",
           { key: id, className: "streak-container" },

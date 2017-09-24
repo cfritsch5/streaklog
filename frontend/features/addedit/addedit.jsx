@@ -90,7 +90,13 @@ class AddEdit extends React.Component{
     } else {
       return(
         <div className='content'>
-          <button onClick={()=>this.setState({add: true})}>Did the Thing!</button>
+          <button className="starbutton"
+            onClick={()=>this.setState({add: true})}>
+            <img className="star"
+              onMouseMove={this.star}
+              src="assets/starrbutton.png"/>
+            <h1>Did A Thing!</h1>
+          </button>
           <div className='routines'>
             {this.routines()}
           </div>

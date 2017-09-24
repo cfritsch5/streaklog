@@ -15,10 +15,12 @@ class NewAchievement extends React.Component {
     if (repeats === "none"){
       achievement = {
         name: e.currentTarget.name.value,
+        date: new Date
       };
     } else {
       achievement = {
         name: e.currentTarget.name.value,
+        date: new Date,
         repeats: repeats
       };
     }
@@ -26,7 +28,6 @@ class NewAchievement extends React.Component {
     console.log("addAchievement", achievement);
     this.props.postNewAchievement(achievement);
   }
-
 
   render(){
       return (
@@ -37,9 +38,11 @@ class NewAchievement extends React.Component {
               placeholder='Achievement Name'
               className=""
               />
-            <input type="text" name="hours" placeholder="hours" className="hours"/>
               <label>
-                <input name="repeats" type="radio" value="none" defaultChecked="defaultChecked"/>
+                <input name="repeats"
+                  type="radio"
+                  value="none"
+                  defaultChecked="defaultChecked"/>
                 non-routine
               </label>
               <label>

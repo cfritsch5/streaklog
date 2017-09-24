@@ -44,12 +44,6 @@ class Streaks extends React.Component{
       let achv = this.props.achievements[streak.achievement] || "blank";
       let rtn = this.props.routines[streak.routine];
       i++;
-      // <div className='streak'
-      //   style={{
-      //     width: `${streak.currentStreak*10}%`,
-      //     background: colors[i],
-      //     height: `${length}px`
-      //   }}>
         return (
           <div key={id} className="streak-container">
             <div className='streak'
@@ -76,7 +70,7 @@ class Streaks extends React.Component{
     let streaks = this.streaks();
     return(
       <div className='streaks'>
-        {streaks}          
+        {streaks}
       </div>
     );
   }
