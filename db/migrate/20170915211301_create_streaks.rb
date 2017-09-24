@@ -6,6 +6,7 @@ class CreateStreaks < ActiveRecord::Migration[5.0]
       t.integer :last_achievement_id
       t.integer :current_streak, default: 0
       t.integer :current_routine_id
+      t.boolean :today
 
       t.timestamps
     end

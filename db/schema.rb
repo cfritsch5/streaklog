@@ -36,12 +36,13 @@ ActiveRecord::Schema.define(version: 20170915211322) do
   create_table "streaks", force: :cascade do |t|
     t.string   "name",                            null: false
     t.integer  "user_id",                         null: false
-    t.integer  "last_achievement_id",             null: false
+    t.integer  "last_achievement_id"
     t.integer  "current_streak",      default: 0
     t.integer  "current_routine_id"
+    t.boolean  "today"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
-    t.index ["name"], name: "index_streaks_on_name", unique: true, using: :btree
+    t.index ["name", "user_id"], name: "index_streaks_on_name_and_user_id", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade do |t|
