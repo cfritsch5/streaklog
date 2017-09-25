@@ -33,7 +33,7 @@ class Avatar extends React.Component{
   dropdown() {
     // <div className="dropdown">
     return (
-      <div className="dropdown" onMouseLeave={this.close}>
+      <div className="dropdown">
         <div className="dropdown-content">
           <SessionFormContainer />
         </div>
@@ -70,7 +70,7 @@ class Avatar extends React.Component{
 
     let username = this.props.currentUser ? this.props.currentUser.username : null;
     return(
-      <div className='avatar' >
+      <div className='avatar' onMouseLeave={this.close}>
           <div className="avatar-content">
             <div className="avatar-overlay">
               {dropdown}

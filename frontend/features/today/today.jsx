@@ -8,7 +8,7 @@ class Today extends React.Component{
 
   renderAchievemets() {
     return(
-      <ul>
+      <ul className="accomplished-today">
         {Object.keys(this.props.achievements).map((id) => (
           <li key={id} >
             {this.props.achievements[id].name}

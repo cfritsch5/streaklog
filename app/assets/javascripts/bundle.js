@@ -42160,7 +42160,7 @@ var Today = function (_React$Component) {
 
       return _react2.default.createElement(
         "ul",
-        null,
+        { className: "accomplished-today" },
         Object.keys(this.props.achievements).map(function (id) {
           return _react2.default.createElement(
             "li",
@@ -42344,7 +42344,7 @@ var AddEdit = function (_React$Component) {
       Object.keys(this.props.routines).forEach(function (id) {
         if (!_this2.state.routinesState[id]) {
           routines.push(_react2.default.createElement(
-            'div',
+            'li',
             { key: id },
             _react2.default.createElement(
               'label',
@@ -42383,11 +42383,7 @@ var AddEdit = function (_React$Component) {
           { className: 'content', onMouseLeave: function onMouseLeave() {
               return _this3.setState({ add: false });
             } },
-          _react2.default.createElement(
-            'div',
-            { className: 'add' },
-            _react2.default.createElement(_newachievement_container2.default, null)
-          )
+          _react2.default.createElement(_newachievement_container2.default, null)
         );
       } else {
         return _react2.default.createElement(
@@ -42400,7 +42396,6 @@ var AddEdit = function (_React$Component) {
                 return _this3.setState({ add: true });
               } },
             _react2.default.createElement('img', { className: 'star',
-              onMouseMove: this.star,
               src: 'assets/starrbutton.png' }),
             _react2.default.createElement(
               'h1',
@@ -42409,7 +42404,7 @@ var AddEdit = function (_React$Component) {
             )
           ),
           _react2.default.createElement(
-            'div',
+            'ul',
             { className: 'routines' },
             this.routines()
           )
@@ -42538,16 +42533,17 @@ var NewAchievement = function (_React$Component) {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "add-new" },
+        "form",
+        { className: "add-new-form", onSubmit: this.addAchievement },
+        _react2.default.createElement("input", { type: "text",
+          name: "name",
+          placeholder: "Achievement Name",
+          className: ""
+        }),
+        _react2.default.createElement("textarea", { placeholder: "Description" }),
         _react2.default.createElement(
-          "form",
-          { onSubmit: this.addAchievement },
-          _react2.default.createElement("input", { type: "text",
-            name: "name",
-            placeholder: "Achievement Name",
-            className: ""
-          }),
+          "div",
+          null,
           _react2.default.createElement(
             "label",
             null,
@@ -42562,16 +42558,17 @@ var NewAchievement = function (_React$Component) {
             null,
             _react2.default.createElement("input", { name: "repeats", type: "radio", value: "daily" }),
             "daily"
-          ),
+          )
+        ),
+        _react2.default.createElement(
+          "button",
+          { className: "starbutton",
+            type: "submit" },
+          _react2.default.createElement("img", { className: "star",
+            src: "assets/starrbutton.png" }),
           _react2.default.createElement(
-            "label",
+            "h1",
             null,
-            _react2.default.createElement("input", { name: "repeats", type: "radio", value: "weekly" }),
-            "weekly"
-          ),
-          _react2.default.createElement(
-            "button",
-            { type: "submit" },
             "Yeah!"
           )
         )
@@ -42714,7 +42711,7 @@ var Streaks = function (_React$Component) {
             "div",
             { className: "streak",
               style: {
-                width: streak.currentStreak * 10 + "%",
+                width: streak.currentStreak * 10 + 10 + "%",
                 background: colors[i]
               } },
             _react2.default.createElement(
@@ -42918,7 +42915,7 @@ var Avatar = function (_React$Component) {
       // <div className="dropdown">
       return _react2.default.createElement(
         'div',
-        { className: 'dropdown', onMouseLeave: this.close },
+        { className: 'dropdown' },
         _react2.default.createElement(
           'div',
           { className: 'dropdown-content' },
@@ -42962,7 +42959,7 @@ var Avatar = function (_React$Component) {
       var username = this.props.currentUser ? this.props.currentUser.username : null;
       return _react2.default.createElement(
         'div',
-        { className: 'avatar' },
+        { className: 'avatar', onMouseLeave: this.close },
         _react2.default.createElement(
           'div',
           { className: 'avatar-content' },

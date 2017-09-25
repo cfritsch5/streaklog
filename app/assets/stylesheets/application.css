@@ -26,39 +26,52 @@ body {
   background-image: url("night-sky-hd-wallpaper.jpg");
 }
 
-.bottom {
-  flex-direction: column;
+:focus {
+  outline: none;
 }
 
-.top {
+/*.top {
   flex-direction: column-reverse;
   align-items: flex-start;
-}
+}*/
 
-.login-form, .top, .bottom, .today, .streaks, .addedit, .avatar {
+/*.login-form, .top, .bottom, .today, .streaks, .addedit, .avatar {
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-}
+}*/
 
 .login-form, .today, .addedit, .streaks {
   flex-direction: column;
 }
 
-.streaks {
-  width: 100%;
+.login-form, .top, .bottom, .today, .streaks, .addedit, .avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .today, .addedit {
   width: 50%;
-  height: 50vh;
-  justify-content: flex-start;
+  height: 100%;
+  /*min-height: fit-content;*/
+  padding: 0px;
 }
-
-@media (min-device-width: 500px){
 
   .top, .bottom {
     flex-direction: row;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .bottom {
+    height: 200px;
+    align-items: flex-end;
+    min-height: fit-content;
+  }
+
+  .top {
+    padding-top: 30px;
   }
 
   .avatar {
@@ -69,23 +82,9 @@ body {
     width: 70%;
   }
 
-  .login-form, .top, .bottom, .today, .streaks, .addedit, .avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}/*End media query*/
-
-/*
-.sparky {
-  width: 80%;
-  border-radius: 25px;
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
 }
-
-.background {
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  opacity: 0.8;
-}*/

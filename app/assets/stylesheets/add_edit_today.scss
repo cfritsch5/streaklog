@@ -1,14 +1,15 @@
 $rounded-corner: 15px;
-$transparent-white: rgba(255, 255, 255, 0.5);
+$transparent-white: rgba(255, 255, 255, 0.7);
 
 .content {
-    margin: 20px;
-    margin-top: 15%;
-    height: 80%;
+    height: 100%;
     background-color: $transparent-white;
     width: 66%;
     border-radius: $rounded-corner;
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .starbutton {
@@ -18,13 +19,38 @@ $transparent-white: rgba(255, 255, 255, 0.5);
   border-radius: 10em;
   background: $transparent-white;
   padding: 0;
+  width: fit-content;
+  align-self: center;
 }
 
-// .starbutton:active {
-//   transform: translateY(5px);
-//   transform: translateX(5px);
-// }
+.starbutton h1 {
+    padding: 5px;
+    padding-right: 10px;
+
+}
 
 .star {
   height: 50px;
+}
+
+.routines {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: inherit;
+}
+
+.add-new {
+  height: 100%
+}
+
+textarea {
+  resize: none;
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: inset;
+  margin: 5px;
 }

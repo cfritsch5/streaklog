@@ -51,7 +51,7 @@ class AddEdit extends React.Component{
     Object.keys(this.props.routines).forEach((id)=>{
       if(!this.state.routinesState[id]){
         routines.push(
-          <div key={id}>
+          <li key={id}>
             <label >
               <input name={id}
                 id={`checkBox${id}`}
@@ -62,7 +62,7 @@ class AddEdit extends React.Component{
 
               {this.props.routines[id].name}
             </label>
-          </div>
+          </li>
         );
       }
     });
@@ -82,9 +82,7 @@ class AddEdit extends React.Component{
     if(this.state.add){
       return(
         <div className='content' onMouseLeave={()=>this.setState({add: false})}>
-          <div className='add' >
             <NewAchievementContainer/>
-          </div>
         </div>
       );
     } else {
@@ -93,13 +91,12 @@ class AddEdit extends React.Component{
           <button className="starbutton"
             onClick={()=>this.setState({add: true})}>
             <img className="star"
-              onMouseMove={this.star}
               src="assets/starrbutton.png"/>
             <h1>Did A Thing!</h1>
           </button>
-          <div className='routines'>
+          <ul className='routines'>
             {this.routines()}
-          </div>
+          </ul>
         </div>
         );
     }

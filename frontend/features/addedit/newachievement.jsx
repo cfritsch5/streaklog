@@ -31,13 +31,16 @@ class NewAchievement extends React.Component {
 
   render(){
       return (
-        <div className='add-new'>
-          <form onSubmit={this.addAchievement}>
+          <form className="add-new-form" onSubmit={this.addAchievement}>
             <input type="text"
               name='name'
               placeholder='Achievement Name'
               className=""
               />
+            <textarea placeholder="Description">
+
+            </textarea>
+            <div>
               <label>
                 <input name="repeats"
                   type="radio"
@@ -49,13 +52,14 @@ class NewAchievement extends React.Component {
                 <input name="repeats" type="radio" value="daily"/>
                 daily
               </label>
-              <label>
-                <input name="repeats" type="radio" value="weekly"/>
-                weekly
-              </label>
-            <button type='submit'>Yeah!</button>
+              </div>
+              <button className="starbutton"
+                type='submit'>
+                <img className="star"
+                  src="assets/starrbutton.png"/>
+                <h1>Yeah!</h1>
+              </button>
             </form>
-          </div>
         );
   }
 }

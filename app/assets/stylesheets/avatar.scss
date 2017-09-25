@@ -73,9 +73,12 @@ form.login-form {
   border-radius: $rounded-corner;
 }
 
+input {
+  font-size: 15px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
 input.login-input {
-    font-size: 15px;
     width: 70%;
-    margin: 5px;
-    border-radius: 5px;
 }

@@ -48,7 +48,7 @@ class Streaks extends React.Component{
           <div key={id} className="streak-container">
             <div className='streak'
               style={{
-                width: `${streak.currentStreak*10}%`,
+                width: `${(streak.currentStreak*10)+ 10}%`,
                 background: colors[i],
               }}>
               <h4 className="streak-title">{streak.name}</h4>
