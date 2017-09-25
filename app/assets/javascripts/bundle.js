@@ -43148,7 +43148,8 @@ var SessionForm = function (_React$Component) {
         var user = {
           username: this.state.username,
           email: this.state.email,
-          password: this.state.password
+          password: this.state.password,
+          time_zone: -new Date().getTimezoneOffset() / 60
         };
         this.props.signup({ user: user });
       } else {

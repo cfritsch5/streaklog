@@ -10,7 +10,8 @@ Achievement.destroy_all
 Routine.destroy_all
 Streak.destroy_all
 
-user_1 = User.create!(username: 'cfritsch', email: 'caseyfritsch@gmail.com', password: 'password')
+Time.use_zone("Pacific Time (US & Canada)") do
+user_1 = User.create!(time_zone: -7, username: 'cfritsch', email: 'caseyfritsch@gmail.com', password: 'password')
 # achievement_1 = Achievement.create!(achievement: 'levo', user_id: user_1.id, difficulty: 1, tags: ['meds', 'daily'] )
 # routine_1 = Routine.create!(name:'Take levo', achievement: achievement_1, repeats: ['daily'], user_id: user_1.id)
 # achievement_2 = Achievement.create!(achievement: 'returned sophie\'s email', user_id: user_1.id, difficulty: 5, tags: ['email'])
@@ -35,3 +36,5 @@ end
 end
 #
 Achievement.create!(name:"take Adderall", user_id: user_1.id, created_at: Date.current - 1, repeats: "whenever")
+
+end

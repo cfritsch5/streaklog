@@ -23,6 +23,7 @@ class Api::UsersController < ApplicationController
     params.require(:user).permit(
     :username,
     :email,
+    :time_zone,
     :password)
   end
 
